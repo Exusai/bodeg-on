@@ -287,6 +287,30 @@ _gtest_SOURCES:FILEPATH=/usr/src/gtest/src/gtest.cc
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/melodic/share/catkin/cmake
 
+//The directory containing a CMake configuration file for cpp_common.
+cpp_common_DIR:PATH=/opt/ros/melodic/share/cpp_common/cmake
+
+//The directory containing a CMake configuration file for gencpp.
+gencpp_DIR:PATH=/opt/ros/melodic/share/gencpp/cmake
+
+//The directory containing a CMake configuration file for geneus.
+geneus_DIR:PATH=/opt/ros/melodic/share/geneus/cmake
+
+//The directory containing a CMake configuration file for genlisp.
+genlisp_DIR:PATH=/opt/ros/melodic/share/genlisp/cmake
+
+//The directory containing a CMake configuration file for genmsg.
+genmsg_DIR:PATH=/opt/ros/melodic/share/genmsg/cmake
+
+//The directory containing a CMake configuration file for gennodejs.
+gennodejs_DIR:PATH=/opt/ros/melodic/share/gennodejs/cmake
+
+//The directory containing a CMake configuration file for genpy.
+genpy_DIR:PATH=/opt/ros/melodic/share/genpy/cmake
+
+//The directory containing a CMake configuration file for geometry_msgs.
+geometry_msgs_DIR:PATH=/opt/ros/melodic/share/geometry_msgs/cmake
+
 //Value Computed by CMake
 gmock_BINARY_DIR:STATIC=/home/faber/bodeg-on/build/gtest/googlemock
 
@@ -335,6 +359,57 @@ gtest_hide_internal_symbols:BOOL=OFF
 
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
+
+//Path to a library.
+lib:FILEPATH=/opt/ros/melodic/lib/librostime.so
+
+//Value Computed by CMake
+manipulador_BINARY_DIR:STATIC=/home/faber/bodeg-on/build/manipulador
+
+//Value Computed by CMake
+manipulador_SOURCE_DIR:STATIC=/home/faber/bodeg-on/src/manipulador
+
+//The directory containing a CMake configuration file for message_generation.
+message_generation_DIR:PATH=/opt/ros/melodic/share/message_generation/cmake
+
+//The directory containing a CMake configuration file for message_runtime.
+message_runtime_DIR:PATH=/opt/ros/melodic/share/message_runtime/cmake
+
+//Value Computed by CMake
+orderpicker_BINARY_DIR:STATIC=/home/faber/bodeg-on/build/orderpicker
+
+//Value Computed by CMake
+orderpicker_SOURCE_DIR:STATIC=/home/faber/bodeg-on/src/orderpicker
+
+//Value Computed by CMake
+ros_tcp_endpoint_BINARY_DIR:STATIC=/home/faber/bodeg-on/build/ROS-TCP-Endpoint
+
+//Value Computed by CMake
+ros_tcp_endpoint_SOURCE_DIR:STATIC=/home/faber/bodeg-on/src/ROS-TCP-Endpoint
+
+//The directory containing a CMake configuration file for roscpp_serialization.
+roscpp_serialization_DIR:PATH=/opt/ros/melodic/share/roscpp_serialization/cmake
+
+//The directory containing a CMake configuration file for roscpp_traits.
+roscpp_traits_DIR:PATH=/opt/ros/melodic/share/roscpp_traits/cmake
+
+//The directory containing a CMake configuration file for rospy.
+rospy_DIR:PATH=/opt/ros/melodic/share/rospy/cmake
+
+//The directory containing a CMake configuration file for rostime.
+rostime_DIR:PATH=/opt/ros/melodic/share/rostime/cmake
+
+//The directory containing a CMake configuration file for sensor_msgs.
+sensor_msgs_DIR:PATH=/opt/ros/melodic/share/sensor_msgs/cmake
+
+//The directory containing a CMake configuration file for std_msgs.
+std_msgs_DIR:PATH=/opt/ros/melodic/share/std_msgs/cmake
+
+//Value Computed by CMake
+unity_msgs_BINARY_DIR:STATIC=/home/faber/bodeg-on/build/unity_msgs
+
+//Value Computed by CMake
+unity_msgs_SOURCE_DIR:STATIC=/home/faber/bodeg-on/src/unity_msgs
 
 
 ########################
@@ -446,7 +521,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

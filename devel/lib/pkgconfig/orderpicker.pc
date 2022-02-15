@@ -1,0 +1,8 @@
+prefix=/home/faber/bodeg-on/devel
+
+Name: orderpicker
+Description: Description of orderpicker
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

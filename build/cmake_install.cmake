@@ -131,6 +131,10 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/faber/bodeg-on/build/gtest/cmake_install.cmake")
+  include("/home/faber/bodeg-on/build/ROS-TCP-Endpoint/cmake_install.cmake")
+  include("/home/faber/bodeg-on/build/manipulador/cmake_install.cmake")
+  include("/home/faber/bodeg-on/build/orderpicker/cmake_install.cmake")
+  include("/home/faber/bodeg-on/build/unity_msgs/cmake_install.cmake")
 
 endif()
 

@@ -1,0 +1,8 @@
+prefix=/home/faber/bodeg-on/install
+
+Name: manipulador
+Description: Description of manipulador
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
