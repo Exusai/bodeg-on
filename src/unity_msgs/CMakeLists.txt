@@ -11,10 +11,12 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(FILES
     ArmPose.msg
     OrderPickerPosition.msg
+    CamImgs.msg
 )
 add_service_files(FILES
     Pose.srv
 	Position.srv
+  Imgserv.srv
 )
 
 generate_messages(

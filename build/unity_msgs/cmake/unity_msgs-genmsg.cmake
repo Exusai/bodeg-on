@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "unity_msgs: 2 messages, 2 services")
+message(STATUS "unity_msgs: 3 messages, 3 services")
 
 set(MSG_I_FLAGS "-Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg;-Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg")
 
@@ -27,6 +27,11 @@ add_custom_target(_unity_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "unity_msgs" "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg" ""
 )
 
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg" NAME_WE)
+add_custom_target(_unity_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "unity_msgs" "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg" "std_msgs/Header"
+)
+
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv" NAME_WE)
 add_custom_target(_unity_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "unity_msgs" "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv" "unity_msgs/ArmPose"
@@ -35,6 +40,11 @@ add_custom_target(_unity_msgs_generate_messages_check_deps_${_filename}
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv" NAME_WE)
 add_custom_target(_unity_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "unity_msgs" "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv" "unity_msgs/OrderPickerPosition"
+)
+
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv" NAME_WE)
+add_custom_target(_unity_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "unity_msgs" "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv" "unity_msgs/CamImgs:std_msgs/Header"
 )
 
 #
@@ -55,6 +65,12 @@ _generate_msg_cpp(unity_msgs
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/unity_msgs
 )
+_generate_msg_cpp(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/unity_msgs
+)
 
 ### Generating Services
 _generate_srv_cpp(unity_msgs
@@ -67,6 +83,12 @@ _generate_srv_cpp(unity_msgs
   "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv"
   "${MSG_I_FLAGS}"
   "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/unity_msgs
+)
+_generate_srv_cpp(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv"
+  "${MSG_I_FLAGS}"
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/unity_msgs
 )
 
@@ -86,9 +108,13 @@ get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPos
 add_dependencies(unity_msgs_generate_messages_cpp _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_cpp _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_cpp _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_cpp _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_cpp _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_cpp _unity_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -112,6 +138,12 @@ _generate_msg_eus(unity_msgs
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/unity_msgs
 )
+_generate_msg_eus(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/unity_msgs
+)
 
 ### Generating Services
 _generate_srv_eus(unity_msgs
@@ -124,6 +156,12 @@ _generate_srv_eus(unity_msgs
   "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv"
   "${MSG_I_FLAGS}"
   "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/unity_msgs
+)
+_generate_srv_eus(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv"
+  "${MSG_I_FLAGS}"
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/unity_msgs
 )
 
@@ -143,9 +181,13 @@ get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPos
 add_dependencies(unity_msgs_generate_messages_eus _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_eus _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_eus _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_eus _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_eus _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_eus _unity_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -169,6 +211,12 @@ _generate_msg_lisp(unity_msgs
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/unity_msgs
 )
+_generate_msg_lisp(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/unity_msgs
+)
 
 ### Generating Services
 _generate_srv_lisp(unity_msgs
@@ -181,6 +229,12 @@ _generate_srv_lisp(unity_msgs
   "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv"
   "${MSG_I_FLAGS}"
   "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/unity_msgs
+)
+_generate_srv_lisp(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv"
+  "${MSG_I_FLAGS}"
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/unity_msgs
 )
 
@@ -200,9 +254,13 @@ get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPos
 add_dependencies(unity_msgs_generate_messages_lisp _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_lisp _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_lisp _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_lisp _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_lisp _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_lisp _unity_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -226,6 +284,12 @@ _generate_msg_nodejs(unity_msgs
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/unity_msgs
 )
+_generate_msg_nodejs(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/unity_msgs
+)
 
 ### Generating Services
 _generate_srv_nodejs(unity_msgs
@@ -238,6 +302,12 @@ _generate_srv_nodejs(unity_msgs
   "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv"
   "${MSG_I_FLAGS}"
   "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/unity_msgs
+)
+_generate_srv_nodejs(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv"
+  "${MSG_I_FLAGS}"
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/unity_msgs
 )
 
@@ -257,9 +327,13 @@ get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPos
 add_dependencies(unity_msgs_generate_messages_nodejs _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_nodejs _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_nodejs _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_nodejs _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_nodejs _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_nodejs _unity_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -283,6 +357,12 @@ _generate_msg_py(unity_msgs
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/unity_msgs
 )
+_generate_msg_py(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/unity_msgs
+)
 
 ### Generating Services
 _generate_srv_py(unity_msgs
@@ -295,6 +375,12 @@ _generate_srv_py(unity_msgs
   "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv"
   "${MSG_I_FLAGS}"
   "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/unity_msgs
+)
+_generate_srv_py(unity_msgs
+  "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv"
+  "${MSG_I_FLAGS}"
+  "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/unity_msgs
 )
 
@@ -314,9 +400,13 @@ get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPos
 add_dependencies(unity_msgs_generate_messages_py _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_py _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_py _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_py _unity_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv" NAME_WE)
+add_dependencies(unity_msgs_generate_messages_py _unity_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv" NAME_WE)
 add_dependencies(unity_msgs_generate_messages_py _unity_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

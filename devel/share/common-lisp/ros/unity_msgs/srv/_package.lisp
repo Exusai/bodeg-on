@@ -1,6 +1,11 @@
 (cl:defpackage unity_msgs-srv
   (:use )
   (:export
+   "IMGSERV"
+   "<IMGSERV-REQUEST>"
+   "IMGSERV-REQUEST"
+   "<IMGSERV-RESPONSE>"
+   "IMGSERV-RESPONSE"
    "POSE"
    "<POSE-REQUEST>"
    "POSE-REQUEST"

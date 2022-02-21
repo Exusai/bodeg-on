@@ -3,6 +3,8 @@
   (:export
    "<ARMPOSE>"
    "ARMPOSE"
+   "<CAMIMGS>"
+   "CAMIMGS"
    "<ORDERPICKERPOSITION>"
    "ORDERPICKERPOSITION"
   ))

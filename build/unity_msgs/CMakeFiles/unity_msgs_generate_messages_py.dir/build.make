@@ -55,8 +55,10 @@ include unity_msgs/CMakeFiles/unity_msgs_generate_messages_py.dir/progress.make
 
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmPose.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerPosition.py
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_CamImgs.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Pose.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Position.py
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py
 
@@ -71,39 +73,58 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/deve
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG unity_msgs/OrderPickerPosition"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg
 
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_CamImgs.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_CamImgs.py: /home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_CamImgs.py: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG unity_msgs/CamImgs"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg
+
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Pose.py: /opt/ros/melodic/lib/genpy/gensrv_py.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Pose.py: /home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Pose.py: /home/faber/bodeg-on/src/unity_msgs/msg/ArmPose.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python code from SRV unity_msgs/Pose"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python code from SRV unity_msgs/Pose"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv
 
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Position.py: /opt/ros/melodic/lib/genpy/gensrv_py.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Position.py: /home/faber/bodeg-on/src/unity_msgs/srv/Position.srv
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Position.py: /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python code from SRV unity_msgs/Position"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python code from SRV unity_msgs/Position"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/faber/bodeg-on/src/unity_msgs/srv/Position.srv -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv
+
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py: /opt/ros/melodic/lib/genpy/gensrv_py.py
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py: /home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py: /home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python code from SRV unity_msgs/Imgserv"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv
 
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmPose.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerPosition.py
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_CamImgs.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Pose.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Position.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python msg __init__.py for unity_msgs"
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python msg __init__.py for unity_msgs"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg --initpy
 
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmPose.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerPosition.py
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_CamImgs.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Pose.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Position.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python srv __init__.py for unity_msgs"
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python srv __init__.py for unity_msgs"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv --initpy
 
 unity_msgs_generate_messages_py: unity_msgs/CMakeFiles/unity_msgs_generate_messages_py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmPose.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerPosition.py
+unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_CamImgs.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Pose.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Position.py
+unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/_Imgserv.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/srv/__init__.py
 unity_msgs_generate_messages_py: unity_msgs/CMakeFiles/unity_msgs_generate_messages_py.dir/build.make
