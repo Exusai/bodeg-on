@@ -55,10 +55,11 @@ include unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs.dir/progress.m
 
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmPose.js
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerPosition.js
-unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/CamImgs.js
-unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Pose.js
-unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Position.js
-unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Imgserv.js
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmTarget.js
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerDirection.js
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerVelocity.js
 
 
 /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmPose.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
@@ -71,38 +72,39 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from unity_msgs/OrderPickerPosition.msg"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
 
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/CamImgs.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/CamImgs.js: /home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/CamImgs.js: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from unity_msgs/CamImgs.msg"
-	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmTarget.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmTarget.js: /home/faber/bodeg-on/src/unity_msgs/msg/ArmTarget.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from unity_msgs/ArmTarget.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/ArmTarget.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
 
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Pose.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Pose.js: /home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Pose.js: /home/faber/bodeg-on/src/unity_msgs/msg/ArmPose.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from unity_msgs/Pose.srv"
-	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerDirection.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerDirection.js: /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerDirection.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from unity_msgs/OrderPickerDirection.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerDirection.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
 
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Position.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Position.js: /home/faber/bodeg-on/src/unity_msgs/srv/Position.srv
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Position.js: /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from unity_msgs/Position.srv"
-	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/srv/Position.srv -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js: /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from unity_msgs/OrderPickerCameraRotation.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
 
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Imgserv.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Imgserv.js: /home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Imgserv.js: /home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg
-/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Imgserv.js: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Javascript code from unity_msgs/Imgserv.srv"
-	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js: /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Javascript code from unity_msgs/OrderPickerLifter.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
+
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerVelocity.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerVelocity.js: /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Javascript code from unity_msgs/OrderPickerVelocity.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
 
 unity_msgs_generate_messages_nodejs: unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs
 unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmPose.js
 unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerPosition.js
-unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/CamImgs.js
-unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Pose.js
-unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Position.js
-unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/srv/Imgserv.js
+unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmTarget.js
+unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerDirection.js
+unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js
+unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js
+unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerVelocity.js
 unity_msgs_generate_messages_nodejs: unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs.dir/build.make
 
 .PHONY : unity_msgs_generate_messages_nodejs

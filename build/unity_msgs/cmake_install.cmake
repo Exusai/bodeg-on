@@ -41,15 +41,11 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/msg" TYPE FILE FILES
     "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPose.msg"
     "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/CamImgs.msg"
-    )
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/srv" TYPE FILE FILES
-    "/home/faber/bodeg-on/src/unity_msgs/srv/Pose.srv"
-    "/home/faber/bodeg-on/src/unity_msgs/srv/Position.srv"
-    "/home/faber/bodeg-on/src/unity_msgs/srv/Imgserv.srv"
+    "/home/faber/bodeg-on/src/unity_msgs/msg/ArmTarget.msg"
+    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerDirection.msg"
+    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg"
+    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg"
+    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg"
     )
 endif()
 
