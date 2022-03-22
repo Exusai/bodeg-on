@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/faber/bodeg-on/install/lib;/home/faber/Unity-Robotics-Hub/tutorials/pick_and_place/ROS/devel/lib;/home/faber/bodeg-on/devel/lib;/home/faber/EK_AutoNOMOS_Sim/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/faber/bodeg-on/install/lib;/home/faber/bodeg-on/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(unity_msgs_LIBRARIES ${unity_msgs_LIBRARIES})
 
   _list_append_unique(unity_msgs_LIBRARY_DIRS ${${unity_msgs_dep}_LIBRARY_DIRS})
-  list(APPEND unity_msgs_EXPORTED_TARGETS ${${unity_msgs_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(unity_msgs_EXPORTED_TARGETS ${${unity_msgs_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "unity_msgs-msg-extras.cmake")

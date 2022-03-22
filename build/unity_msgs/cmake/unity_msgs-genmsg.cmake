@@ -2,7 +2,7 @@
 
 message(STATUS "unity_msgs: 7 messages, 0 services")
 
-set(MSG_I_FLAGS "-Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg;-Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg;-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)

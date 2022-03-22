@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/faber/bodeg-on/devel/lib;/home/faber/Unity-Robotics-Hub/tutorials/pick_and_place/ROS/devel/lib;/home/faber/bodeg-on/devel/lib;/home/faber/EK_AutoNOMOS_Sim/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/faber/bodeg-on/devel/lib;/home/faber/bodeg-on/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(ros_tcp_endpoint_LIBRARIES ${ros_tcp_endpoint_LIBRARIES})
 
   _list_append_unique(ros_tcp_endpoint_LIBRARY_DIRS ${${ros_tcp_endpoint_dep}_LIBRARY_DIRS})
-  list(APPEND ros_tcp_endpoint_EXPORTED_TARGETS ${${ros_tcp_endpoint_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(ros_tcp_endpoint_EXPORTED_TARGETS ${${ros_tcp_endpoint_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")

@@ -268,7 +268,7 @@ if __name__ == '__main__':
 
         if not args.local:
             # environment at generation time
-            CMAKE_PREFIX_PATH = r'/home/faber/Unity-Robotics-Hub/tutorials/pick_and_place/ROS/devel;/home/faber/bodeg-on/devel;/home/faber/EK_AutoNOMOS_Sim/devel;/opt/ros/melodic'.split(';')
+            CMAKE_PREFIX_PATH = r'/home/faber/bodeg-on/devel;/opt/ros/noetic'.split(';')
         else:
             # don't consider any other prefix path than this one
             CMAKE_PREFIX_PATH = []
