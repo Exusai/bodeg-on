@@ -51,7 +51,7 @@ def wait_for_connections(pub, topic):
 if __name__ == '__main__':
     try:
         rospy.init_node(NODE_NAME, anonymous=True)
-        pub = rospy.Publisher(TOPIC_NAME, ArmTarget, queue_size=10)
+        pub = rospy.Publisher(TOPIC_NAME, ArmTarget, queue_size=2)
         wait_for_connections(pub, TOPIC_NAME)
 
         r = rospy.Rate(10) # 10hz
