@@ -11,7 +11,7 @@ TOPIC_NAME = 'target'
 NODE_NAME = 'target_publisher'
 
 # Para iterar y hacer un circulo
-c = 1
+c = 0
 
 def post_target():
     # Estos valores esta con respecto al origen del brazo
@@ -24,13 +24,13 @@ def post_target():
     x = .5 * np.cos(theta) + xCircle
     y = .5 * np.sin(theta) + yCircle
     
-    z = -1
+    z = -.5
     grabAngle = 0
     
     target = ArmTarget(x, y, z, grabAngle)
     pub.publish(target)
-    c += 1
-    #time.sleep(0.1)
+    c += .2
+    time.sleep(0.1)
 
 
 def wait_for_connections(pub, topic):
