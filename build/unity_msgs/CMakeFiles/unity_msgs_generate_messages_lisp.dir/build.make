@@ -60,6 +60,7 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/de
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerCameraRotation.lisp
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerLifter.lisp
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerVelocity.lisp
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/GripperSuck.lisp
 
 
 /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmPose.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
@@ -97,6 +98,11 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/de
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Lisp code from unity_msgs/OrderPickerVelocity.msg"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg
 
+/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/GripperSuck.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/GripperSuck.lisp: /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Lisp code from unity_msgs/GripperSuck.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg
+
 unity_msgs_generate_messages_lisp: unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp
 unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmPose.lisp
 unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerPosition.lisp
@@ -105,6 +111,7 @@ unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/
 unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerCameraRotation.lisp
 unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerLifter.lisp
 unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerVelocity.lisp
+unity_msgs_generate_messages_lisp: /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/GripperSuck.lisp
 unity_msgs_generate_messages_lisp: unity_msgs/CMakeFiles/unity_msgs_generate_messages_lisp.dir/build.make
 
 .PHONY : unity_msgs_generate_messages_lisp

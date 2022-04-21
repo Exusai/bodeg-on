@@ -60,6 +60,7 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/deve
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerCameraRotation.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerLifter.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerVelocity.py
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_GripperSuck.py
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py
 
 
@@ -98,6 +99,11 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/deve
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python from MSG unity_msgs/OrderPickerVelocity"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg
 
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_GripperSuck.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_GripperSuck.py: /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python from MSG unity_msgs/GripperSuck"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg
+
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmPose.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerPosition.py
@@ -106,7 +112,8 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_py: /home/faber/bodeg-on/deve
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerCameraRotation.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerLifter.py
 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerVelocity.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python msg __init__.py for unity_msgs"
+/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_GripperSuck.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Python msg __init__.py for unity_msgs"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg --initpy
 
 unity_msgs_generate_messages_py: unity_msgs/CMakeFiles/unity_msgs_generate_messages_py
@@ -117,6 +124,7 @@ unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-pac
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerCameraRotation.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerLifter.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerVelocity.py
+unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_GripperSuck.py
 unity_msgs_generate_messages_py: /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py
 unity_msgs_generate_messages_py: unity_msgs/CMakeFiles/unity_msgs_generate_messages_py.dir/build.make
 

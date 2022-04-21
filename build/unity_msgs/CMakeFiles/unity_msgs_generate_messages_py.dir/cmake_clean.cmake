@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmPose.py"
   "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmTarget.py"
+  "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_GripperSuck.py"
   "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerCameraRotation.py"
   "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerDirection.py"
   "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerLifter.py"

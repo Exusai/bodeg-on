@@ -60,6 +60,7 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus: /home/faber/bodeg-on/dev
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerCameraRotation.l
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerLifter.l
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerVelocity.l
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/GripperSuck.l
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/manifest.l
 
 
@@ -98,8 +99,13 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus: /home/faber/bodeg-on/dev
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating EusLisp code from unity_msgs/OrderPickerVelocity.msg"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg
 
+/home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/GripperSuck.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/GripperSuck.l: /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating EusLisp code from unity_msgs/GripperSuck.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg
+
 /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating EusLisp manifest code for unity_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating EusLisp manifest code for unity_msgs"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs unity_msgs geometry_msgs std_msgs
 
 unity_msgs_generate_messages_eus: unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus
@@ -110,6 +116,7 @@ unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/un
 unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerCameraRotation.l
 unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerLifter.l
 unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerVelocity.l
+unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/GripperSuck.l
 unity_msgs_generate_messages_eus: /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/manifest.l
 unity_msgs_generate_messages_eus: unity_msgs/CMakeFiles/unity_msgs_generate_messages_eus.dir/build.make
 

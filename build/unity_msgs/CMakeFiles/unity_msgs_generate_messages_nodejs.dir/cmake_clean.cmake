@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmPose.js"
   "/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmTarget.js"
+  "/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/GripperSuck.js"
   "/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js"
   "/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerDirection.js"
   "/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js"

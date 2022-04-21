@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPose.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg;/home/faber/bodeg-on/src/unity_msgs/msg/ArmTarget.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerDirection.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg"
+messages_str = "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPose.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg;/home/faber/bodeg-on/src/unity_msgs/msg/ArmTarget.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerDirection.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg;/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg;/home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg"
 services_str = ""
 pkg_name = "unity_msgs"
 dependencies_str = "geometry_msgs;std_msgs"

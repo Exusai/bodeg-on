@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "/home/faber/bodeg-on/devel/include/unity_msgs/ArmPose.h"
   "/home/faber/bodeg-on/devel/include/unity_msgs/ArmTarget.h"
+  "/home/faber/bodeg-on/devel/include/unity_msgs/GripperSuck.h"
   "/home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerCameraRotation.h"
   "/home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerDirection.h"
   "/home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerLifter.h"

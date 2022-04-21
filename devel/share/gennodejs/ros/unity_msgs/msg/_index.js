@@ -8,6 +8,7 @@ let OrderPickerVelocity = require('./OrderPickerVelocity.js');
 let OrderPickerLifter = require('./OrderPickerLifter.js');
 let ArmTarget = require('./ArmTarget.js');
 let ArmPose = require('./ArmPose.js');
+let GripperSuck = require('./GripperSuck.js');
 
 module.exports = {
   OrderPickerPosition: OrderPickerPosition,
@@ -17,4 +18,5 @@ module.exports = {
   OrderPickerLifter: OrderPickerLifter,
   ArmTarget: ArmTarget,
   ArmPose: ArmPose,
+  GripperSuck: GripperSuck,
 };

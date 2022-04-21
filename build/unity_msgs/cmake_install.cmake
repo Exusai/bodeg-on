@@ -46,6 +46,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg"
     "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg"
     "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg"
+    "/home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg"
     )
 endif()
 

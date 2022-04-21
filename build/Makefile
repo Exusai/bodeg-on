@@ -649,6 +649,19 @@ _unity_msgs_generate_messages_check_deps_OrderPickerVelocity/fast:
 .PHONY : _unity_msgs_generate_messages_check_deps_OrderPickerVelocity/fast
 
 #=============================================================================
+# Target rules for targets named _unity_msgs_generate_messages_check_deps_GripperSuck
+
+# Build rule for target.
+_unity_msgs_generate_messages_check_deps_GripperSuck: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _unity_msgs_generate_messages_check_deps_GripperSuck
+.PHONY : _unity_msgs_generate_messages_check_deps_GripperSuck
+
+# fast build rule for target.
+_unity_msgs_generate_messages_check_deps_GripperSuck/fast:
+	$(MAKE) -f unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_GripperSuck.dir/build.make unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_GripperSuck.dir/build
+.PHONY : _unity_msgs_generate_messages_check_deps_GripperSuck/fast
+
+#=============================================================================
 # Target rules for targets named unity_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -763,6 +776,7 @@ help:
 	@echo "... unity_msgs_generate_messages"
 	@echo "... _unity_msgs_generate_messages_check_deps_OrderPickerLifter"
 	@echo "... _unity_msgs_generate_messages_check_deps_OrderPickerVelocity"
+	@echo "... _unity_msgs_generate_messages_check_deps_GripperSuck"
 	@echo "... unity_msgs_generate_messages_cpp"
 	@echo "... unity_msgs_genlisp"
 	@echo "... unity_msgs_gencpp"

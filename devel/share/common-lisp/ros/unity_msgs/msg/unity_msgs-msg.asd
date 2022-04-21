@@ -8,6 +8,8 @@
     (:file "_package_ArmPose" :depends-on ("_package"))
     (:file "ArmTarget" :depends-on ("_package_ArmTarget"))
     (:file "_package_ArmTarget" :depends-on ("_package"))
+    (:file "GripperSuck" :depends-on ("_package_GripperSuck"))
+    (:file "_package_GripperSuck" :depends-on ("_package"))
     (:file "OrderPickerCameraRotation" :depends-on ("_package_OrderPickerCameraRotation"))
     (:file "_package_OrderPickerCameraRotation" :depends-on ("_package"))
     (:file "OrderPickerDirection" :depends-on ("_package_OrderPickerDirection"))

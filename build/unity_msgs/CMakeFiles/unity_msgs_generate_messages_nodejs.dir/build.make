@@ -60,6 +60,7 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerVelocity.js
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/GripperSuck.js
 
 
 /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmPose.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
@@ -97,6 +98,11 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Javascript code from unity_msgs/OrderPickerVelocity.msg"
 	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
 
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/GripperSuck.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/GripperSuck.js: /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Javascript code from unity_msgs/GripperSuck.msg"
+	cd /home/faber/bodeg-on/build/unity_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg
+
 unity_msgs_generate_messages_nodejs: unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs
 unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmPose.js
 unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerPosition.js
@@ -105,6 +111,7 @@ unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/
 unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js
 unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js
 unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerVelocity.js
+unity_msgs_generate_messages_nodejs: /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/GripperSuck.js
 unity_msgs_generate_messages_nodejs: unity_msgs/CMakeFiles/unity_msgs_generate_messages_nodejs.dir/build.make
 
 .PHONY : unity_msgs_generate_messages_nodejs

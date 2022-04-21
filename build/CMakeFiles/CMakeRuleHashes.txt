@@ -1,6 +1,7 @@
 # Hashes of file build rules.
 d1d8f14d98810495aca583b7e9e24525 /home/faber/bodeg-on/devel/include/unity_msgs/ArmPose.h
 87fb155d9caead1e89cdc4b00ef1e463 /home/faber/bodeg-on/devel/include/unity_msgs/ArmTarget.h
+b793146d1248d97fbe96b1ea5e260748 /home/faber/bodeg-on/devel/include/unity_msgs/GripperSuck.h
 d9a6da2968630d978bab3ab9e09d02cc /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerCameraRotation.h
 2129aa8c80070b0f8e8578d4d543c706 /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerDirection.h
 b95232aa20335df4b0c7fdc40345e8da /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerLifter.h
@@ -8,6 +9,7 @@ b95232aa20335df4b0c7fdc40345e8da /home/faber/bodeg-on/devel/include/unity_msgs/O
 a210b06ec5a2fad3f97b91383a9134ca /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerVelocity.h
 aecffe4ae63a5706c42409635ee04212 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmPose.py
 3214fb5f4ae497ab86de788d5cc8fe26 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_ArmTarget.py
+c56168bce4e845ec77c16efc570b8905 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_GripperSuck.py
 0967df55f65151a75a0082eb78fac2c2 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerCameraRotation.py
 917d3b678472e25702859d47f7afbfda /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerDirection.py
 d81695e6fcc10e754d4d604587ebe6f7 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/_OrderPickerLifter.py
@@ -16,6 +18,7 @@ fdc800adde75ecd0c4fb83671e5b0641 /home/faber/bodeg-on/devel/lib/python3/dist-pac
 f25c50f7bf94dc7fa88384be06a5a496 /home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs/msg/__init__.py
 3615ee52ddc61f3721c4149d23a4dfd2 /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmPose.lisp
 5848e0db76a46bfe59150aff40181579 /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmTarget.lisp
+d3bf433601dc5c45ad7326e655b5ff96 /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/GripperSuck.lisp
 20ba579b149adda3024ca0aeccdb684b /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerCameraRotation.lisp
 448e03831fde80fd284e9563c7272929 /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerDirection.lisp
 b7ca08d314d4739b6ee0355c4f609b78 /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerLifter.lisp
@@ -23,6 +26,7 @@ b7ca08d314d4739b6ee0355c4f609b78 /home/faber/bodeg-on/devel/share/common-lisp/ro
 fffa4a17a5a67a26fd028bc33d5abbe7 /home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerVelocity.lisp
 80644c111086b2927f1232f9d80c0cb5 /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmPose.js
 9505db192b1395b78953c63d6d40fc8f /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/ArmTarget.js
+f0c864074888a9aad3d04ef9eb88dec6 /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/GripperSuck.js
 1a45b149ceb074e7ed7bdac0b21962ed /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerCameraRotation.js
 c220a746cf0ff4cda3e7cc117faa071e /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerDirection.js
 5e9345b0814f0ce50b7542a407e6c8f2 /home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs/msg/OrderPickerLifter.js
@@ -31,6 +35,7 @@ f374d7d85892e75666ab3754f1235955 /home/faber/bodeg-on/devel/share/gennodejs/ros/
 c4984cda7f9cf18f21f72f71e29db52d /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/manifest.l
 ca26499274e086959348022383ef4f57 /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/ArmPose.l
 9ae1d19630b050f006bbf3c32e708f23 /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/ArmTarget.l
+afffbba83e8d7c7f4b3b85b980753435 /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/GripperSuck.l
 687ef94ca0a0e959c3046cfe6904fdb9 /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerCameraRotation.l
 036fbe09c8b372c4cd9881959d6d4bea /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerDirection.l
 aa1e6f843bfaf5cea2572e3f8a0ab645 /home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs/msg/OrderPickerLifter.l
@@ -39,6 +44,7 @@ aa1e6f843bfaf5cea2572e3f8a0ab645 /home/faber/bodeg-on/devel/share/roseus/ros/uni
 ba99279d02f0a12352a2e1c1ee157173 CMakeFiles/clean_test_results
 5f381a1720164a1fe771e1563733695c unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_ArmPose
 dd96fbea7f122928cbb64c9728f85ec5 unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_ArmTarget
+88a9238d1f662f4e2b36b5fd436c0068 unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_GripperSuck
 02cad693c4c552e6dfde5a108e6799ab unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_OrderPickerCameraRotation
 94a7c5110af9921beb94fcffa5c5edfa unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_OrderPickerDirection
 4d29610482f1824becee79eaa3aea4b1 unity_msgs/CMakeFiles/_unity_msgs_generate_messages_check_deps_OrderPickerLifter

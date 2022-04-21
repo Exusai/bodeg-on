@@ -1,5 +1,6 @@
 from ._ArmPose import *
 from ._ArmTarget import *
+from ._GripperSuck import *
 from ._OrderPickerCameraRotation import *
 from ._OrderPickerDirection import *
 from ._OrderPickerLifter import *

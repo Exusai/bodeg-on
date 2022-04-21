@@ -16,6 +16,7 @@ add_message_files(FILES
     OrderPickerCameraRotation.msg
     OrderPickerLifter.msg
     OrderPickerVelocity.msg
+    GripperSuck.msg
 )
 
 #add_service_files(FILES

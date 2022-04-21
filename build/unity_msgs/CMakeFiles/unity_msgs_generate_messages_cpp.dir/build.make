@@ -60,6 +60,7 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/dev
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerCameraRotation.h
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerLifter.h
 unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerVelocity.h
+unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/GripperSuck.h
 
 
 /home/faber/bodeg-on/devel/include/unity_msgs/ArmPose.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
@@ -104,6 +105,12 @@ unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/dev
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating C++ code from unity_msgs/OrderPickerVelocity.msg"
 	cd /home/faber/bodeg-on/src/unity_msgs && /home/faber/bodeg-on/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/include/unity_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
+/home/faber/bodeg-on/devel/include/unity_msgs/GripperSuck.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/faber/bodeg-on/devel/include/unity_msgs/GripperSuck.h: /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg
+/home/faber/bodeg-on/devel/include/unity_msgs/GripperSuck.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/faber/bodeg-on/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating C++ code from unity_msgs/GripperSuck.msg"
+	cd /home/faber/bodeg-on/src/unity_msgs && /home/faber/bodeg-on/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg -Iunity_msgs:/home/faber/bodeg-on/src/unity_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p unity_msgs -o /home/faber/bodeg-on/devel/include/unity_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+
 unity_msgs_generate_messages_cpp: unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp
 unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/ArmPose.h
 unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerPosition.h
@@ -112,6 +119,7 @@ unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/
 unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerCameraRotation.h
 unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerLifter.h
 unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/OrderPickerVelocity.h
+unity_msgs_generate_messages_cpp: /home/faber/bodeg-on/devel/include/unity_msgs/GripperSuck.h
 unity_msgs_generate_messages_cpp: unity_msgs/CMakeFiles/unity_msgs_generate_messages_cpp.dir/build.make
 
 .PHONY : unity_msgs_generate_messages_cpp
