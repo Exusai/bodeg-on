@@ -5,9 +5,19 @@ import math
 # Robot Link Length Parameter
 link = [1.1, 0.8]
 # Robot Initial Joint Values (degree)
-angle = [0, 0]
+angle = [26.60 + 90, 119]
 # Target End of Effector Position
 target = [0, 0, 0] 
+
+# Pallet size
+height = 1.2
+width = 1.0
+
+pallet_x1 = 0 - .65
+pallet_x2 = width - .65
+
+pallet_y1 = 0
+pallet_y2 = 0
 
 # Create figure to plot
 fig = plt.figure() 
@@ -113,7 +123,7 @@ def onclick(event):
     for i in range(len(link)):
         start_point = P[i]
         end_point = P[i+1]
-        ax.plot([start_point[0,3], end_point[0,3]], [start_point[1,3], end_point[1,3]], linewidth=5)
+        ax.plot([start_point[0,3], end_point[0,3]], [start_point[1,3], end_point[1,3]], linewidth=3)
         # draw_axis(ax, scale=5, A=P[i+1], draw_2d=True)
 
     # plot a blue shaded region to indicate first quadrant
@@ -122,10 +132,12 @@ def onclick(event):
     ax.fill([0, -3.5, -3.5, 0], [0, 0, 3.5, 3.5], 'r', alpha=0.2)
     # plot a circular area
     ax.add_patch(plt.Circle((0, 0), sum(link), color='g', fill=True, alpha=0.2))
+    # plot a yellow area to indicate restricted area
+    ax.fill([pallet_x1, pallet_x2, pallet_x2, pallet_x1], [pallet_y1, pallet_y2, height, height], 'y', alpha=0.8)
 
     if solved:
         # Plot a line from the last joint to the mouse click
-        ax.plot([P[-1][0,3], event.xdata], [P[-1][1,3], event.ydata], 'g', linewidth=5)
+        ax.plot([P[-1][0,3], event.xdata], [P[-1][1,3], event.ydata], 'g', linewidth=3)
         print("\nIK solved\n")
         print("Iteration :", iteration)
         print("Angle :", angle)
@@ -168,6 +180,11 @@ def main():
     ax.fill([0, -3.5, -3.5, 0], [0, 0, 3.5, 3.5], 'r', alpha=0.2)
     # plot a circular area
     ax.add_patch(plt.Circle((0, 0), sum(link), color='g', fill=True, alpha=0.2))
+    # plot a yellow area to indicate restricted area
+    ax.fill([pallet_x1, pallet_x2, pallet_x2, pallet_x1], [pallet_y1, pallet_y2, height, height], 'y', alpha=0.8)
+
+    # Draw last joint on idle
+    ax.plot([P[-1][0,3], 0], [P[-1][1,3], .32], 'g', linewidth=3)
 
     plt.grid(True)
     plt.show()
