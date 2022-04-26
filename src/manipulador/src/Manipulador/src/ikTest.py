@@ -13,8 +13,8 @@ target = [0, 0, 0]
 height = 1.2
 width = 1.0
 
-pallet_x1 = 0 - .65
-pallet_x2 = width - .65
+pallet_x1 = 0 - width/2
+pallet_x2 = width - width/2
 
 pallet_y1 = 0
 pallet_y2 = 0
@@ -97,6 +97,18 @@ def IK(target, angle, link, max_iter = 10000, err_min = 0.01):
             
     return angle, err_end_to_target, solved, loop
 
+
+def drawExtras():
+    # plot a blue shaded region to indicate first quadrant
+    ax.fill([0, 3.5, 3.5, 0], [0, 0, 3.5, 3.5], 'b', alpha=0.2)
+    # plot a red shaded region to indicate second quadrant
+    ax.fill([0, -3.5, -3.5, 0], [0, 0, 3.5, 3.5], 'r', alpha=0.2)
+    # plot a circular area
+    ax.add_patch(plt.Circle((0, 0), sum(link), color='g', fill=True, alpha=0.2))
+    # plot a yellow area to indicate restricted area
+    ax.fill([pallet_x1, pallet_x2, pallet_x2, pallet_x1], [pallet_y1, pallet_y2, height, height], 'y', alpha=0.8)
+    ax.fill([-width/2, width/2, width/2, -width/2], [-.75, -.75, -1, -1], 'y', alpha=1)
+
 # Have not implemented
 def onclick(event):
     global target, link, angle, ax
@@ -104,10 +116,10 @@ def onclick(event):
     target[1] = event.ydata
 
     # if target is in the second quadrant
-    if target[0] < 0:
-        target[0] += 1.5
+    if target[0] < -width/2:
+        target[0] += .94
     else:
-        target[0] -= 1.5
+        target[0] -= .94
     
     print("Target Position : ", target)
     plt.cla()
@@ -126,14 +138,7 @@ def onclick(event):
         ax.plot([start_point[0,3], end_point[0,3]], [start_point[1,3], end_point[1,3]], linewidth=3)
         # draw_axis(ax, scale=5, A=P[i+1], draw_2d=True)
 
-    # plot a blue shaded region to indicate first quadrant
-    ax.fill([0, 3.5, 3.5, 0], [0, 0, 3.5, 3.5], 'b', alpha=0.2)
-    # plot a red shaded region to indicate second quadrant
-    ax.fill([0, -3.5, -3.5, 0], [0, 0, 3.5, 3.5], 'r', alpha=0.2)
-    # plot a circular area
-    ax.add_patch(plt.Circle((0, 0), sum(link), color='g', fill=True, alpha=0.2))
-    # plot a yellow area to indicate restricted area
-    ax.fill([pallet_x1, pallet_x2, pallet_x2, pallet_x1], [pallet_y1, pallet_y2, height, height], 'y', alpha=0.8)
+    drawExtras()
 
     if solved:
         # Plot a line from the last joint to the mouse click
@@ -153,6 +158,8 @@ def onclick(event):
 
     # Draw clicked point
     ax.plot(event.xdata, event.ydata, 'ro')
+
+    ax.set_aspect('equal', adjustable='box')
     
     # Update canvas
     fig.canvas.draw()
@@ -174,17 +181,12 @@ def main():
         ax.plot([start_point[0,3], end_point[0,3]], [start_point[1,3], end_point[1,3]], linewidth=3)
         # draw_axis(ax, scale=5, A=P[i+1], draw_2d=True)
 
-    # plot a blue shaded region to indicate first quadrant
-    ax.fill([0, 3.5, 3.5, 0], [0, 0, 3.5, 3.5], 'b', alpha=0.2)
-    # plot a red shaded region to indicate second quadrant
-    ax.fill([0, -3.5, -3.5, 0], [0, 0, 3.5, 3.5], 'r', alpha=0.2)
-    # plot a circular area
-    ax.add_patch(plt.Circle((0, 0), sum(link), color='g', fill=True, alpha=0.2))
-    # plot a yellow area to indicate restricted area
-    ax.fill([pallet_x1, pallet_x2, pallet_x2, pallet_x1], [pallet_y1, pallet_y2, height, height], 'y', alpha=0.8)
+    drawExtras()
 
     # Draw last joint on idle
     ax.plot([P[-1][0,3], 0], [P[-1][1,3], .32], 'g', linewidth=3)
+
+    ax.set_aspect('equal', adjustable='box')
 
     plt.grid(True)
     plt.show()

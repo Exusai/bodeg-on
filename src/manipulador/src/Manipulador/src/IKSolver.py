@@ -1,28 +1,28 @@
-import numpy as np 
-import matplotlib.pyplot as plt 
+import numpy as np
 import math
 
 class CyclicCoordinateDescentInverseKinematics:
-    def __init__(self, link, max_iter=1000, err_min=0.01):
-        self.max_iter = err_min
-        self.err_min = 0.01
+    def __init__(self, link, angle, max_iter=1000, err_min=0.01):
+        self.max_iter = max_iter
+        self.err_min = err_min
         self.target = [0, 0, 0]
 
         # Robot Initial Joint Values (degree)
-        self.initAngle = [0, 0]
+        #self.angle = [0, 0]
+        self.angle = angle
 
         # Robot Link Length Parameter
         #self.link = [1.1, 0.8]
         self.link = link
 
-    def rotateZ(theta):
+    def rotateZ(self, theta):
         rz = np.array([[math.cos(theta), - math.sin(theta), 0, 0],
                     [math.sin(theta), math.cos(theta), 0, 0],
                     [0, 0, 1, 0],
                     [0, 0, 0, 1]])
         return rz
 
-    def translate(dx, dy, dz):
+    def translate(self, dx, dy, dz):
         t = np.array([[1, 0, 0, dx],
                     [0, 1, 0, dy],
                     [0, 0, 1, dz],
@@ -32,23 +32,23 @@ class CyclicCoordinateDescentInverseKinematics:
     # Forward Kinematics
     # Input initial angles and length of links
     # Output positions each points
-    def FK(self, angle, link):
-        n_links = len(link)
+    def FK(self):
+        n_links = len(self.link)
         P = []
         P.append(np.eye(4))
         for i in range(0, n_links):
-            R = self.rotateZ(angle[i]/180*math.pi)
-            T = self.translate(link[i], 0, 0)
+            R = self.rotateZ(self.angle[i]/180*math.pi)
+            T = self.translate(self.link[i], 0, 0)
             P.append(P[-1].dot(R).dot(T))
         return P
 
-    def IK(self, target, angle, link):
+    def IK(self, target):
         solved = False
         err_end_to_target = math.inf
         
         for loop in range(self.max_iter):
-            for i in range(len(link)-1, -1, -1):
-                P = self.FK(angle, link)
+            for i in range(len(self.link)-1, -1, -1):
+                P = self.FK()
                 end_to_target = target - P[-1][:3, 3]
                 err_end_to_target = math.sqrt(end_to_target[0] ** 2 + end_to_target[1] ** 2)
                 if err_end_to_target < self.err_min:
@@ -77,14 +77,14 @@ class CyclicCoordinateDescentInverseKinematics:
                         rot_ang = -rot_ang
 
                     # Update current joint angle values
-                    angle[i] = angle[i] + (rot_ang * 180 / math.pi)
+                    self.angle[i] = self.angle[i] + (rot_ang * 180 / math.pi)
 
-                    if angle[i] >= 360:
-                        angle[i] = angle[i] - 360
-                    if angle[i] < 0:
-                        angle[i] = 360 + angle[i]
+                    if self.angle[i] >= 360:
+                        self.angle[i] = self.angle[i] - 360
+                    if self.angle[i] < 0:
+                        self.angle[i] = 360 + self.angle[i]
                     
             if solved:
                 break
                 
-        return angle, err_end_to_target, solved, loop
+        return self.angle, err_end_to_target, solved, loop

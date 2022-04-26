@@ -1,38 +1,35 @@
-import numpy as np
-from . IKSolver import IKSolver
-# La junta prismatica en z empieza en -.4303 y va hasta -1.5269
-# Angulos del brazo completamente extendido:
-# 179.98 (180)  target: 0
-# 0.0           target: 0
-# 359.99 (360)  target: 0
+from IKSolver import CyclicCoordinateDescentInverseKinematics
+
 
 class Arm:
-    def __init__(self):
-        print("Initializing")
-        self.stopped = False
-        self.isIdle = True
-        self.hasReachedIdle = False
-        self.isFrozen = False
-        self.isGrabbing = False
-        self.fullKinematics = False
-        
-        # Lenght of the links of the arm
-        self.E0Length = 1.1
-        self.E1Length = 0.8
-        self.E2Length = 1.5
+    def __init__(self, links, initAngles):
+        self.links = links
+        self.ikSolver = CyclicCoordinateDescentInverseKinematics(links, initAngles)
 
-        # Idle angle values (is initiated in idle position)
-        self.alpha = np.radians(153.35) # target angle 26.60
-        self.beta = np.radians(241.02)  # target angle 119.04
-        self.gamma = np.radians(235.61) # target angle 124.35
+    def solveForTarget(self, target):
+        angle, err, solved, iteration = arm.ikSolver.IK(target)
+        P = arm.ikSolver.FK()
+        return P, angle, err, solved, iteration
         
-        print("Initialized")
 
+if __name__ == "__main__":
+    arm = Arm([1.1, 0.8], [26.60 + 90, 119])
+    target = [1, 1, 0]
+    P, angle, err, solved, iteration = arm.solveForTarget(target)
     
-    def doSomething(self):
-        print("Doing something")
+    if solved:
+        print("\nIK solved\n")
+        print("Iteration :", iteration)
+        print("Angle :", angle)
+        print("Target :", target)
+        print("End Effector :", P[-1][:3, 3])
+        print("Error :", err)
+    else:
+        print("\nIK error\n")
+        print("Angle :", angle)
+        print("Target :", target)
+        print("End Effector :", P[-1][:3, 3])
+        print("Error :", err)
 
-    def emergencyStop(self):
-        print("Emergency stop")
-        self.stopped = True
-        self.isIdle = False
+    #print(arm.ikSolver.link)
+    #print(arm.ikSolver.angle)
