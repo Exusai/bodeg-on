@@ -1,47 +1,39 @@
-import sys
-from src.Arm import Arm
+#!/usr/bin/env python3
+
+import math
+
+from src.MotionCore import MotionCore
 
 if __name__ == "__main__":
-    arm = Arm()
-    while not arm.stopped:
-        arm.doSomething()
+    motion = MotionCore()
 
+    if motion.isInitialized:
+        #motion.goToIdle() # only do if it is not already in idle state
 
-""" import numpy as np
-from . IKSolver import IKSolver
-# La junta prismatica en z empieza en -.4303 y va hasta -1.5269
-# Angulos del brazo completamente extendido:
-# 179.98 (180)  target: 0
-# 0.0           target: 0
-# 359.99 (360)  target: 0
+        targetPlane = [1.12, -2.22, 0]
+        #targetPlane = [.5, -2.22, 0]
 
-class Arm:
-    def __init__(self):
-        print("Initializing")
-        self.stopped = False
-        self.isIdle = True
-        self.hasReachedIdle = False
-        self.isFrozen = False
-        self.isGrabbing = False
-        self.fullKinematics = False
-        
-        # Lenght of the links of the arm
-        self.E0Length = 1.1
-        self.E1Length = 0.8
-        self.E2Length = .94
+        end = [.5, 0, 0]
 
-        # Idle angle values (is initiated in idle position)
-        self.alpha = np.radians(153.35) # target angle 26.60
-        self.beta = np.radians(241.02)  # target angle 119.04
-        self.gamma = np.radians(235.61) # target angle 124.35
-        
-        print("Initialized")
+        # Para la primerca caja bajar -.20m
+        targetZ = -.20
 
+        # para la primer caja dejar a -.8m
+        placeForBoxZ = -.8
+
+        # offset targetPlane in x by -.94
+        targetPlane[1] = targetPlane[1] + .94
+        end[1] = end[1] + .94
+
+        # rotate targetPlane by -90 degrees
+        #targetPlane[0] = targetPlane[0] * math.cos(math.radians(-90)) - targetPlane[1] * math.sin(math.radians(-90))
+        #targetPlane[1] = targetPlane[0] * math.sin(math.radians(-90)) + targetPlane[1] * math.cos(math.radians(-90))
+
+        # rotate end by -90 degrees
+        #end[0] = end[0] * math.cos(math.radians(-90)) - end[1] * math.sin(math.radians(-90))
+        #end[1] = end[0] * math.sin(math.radians(-90)) + end[1] * math.cos(math.radians(-90))
+
+        motion.takeBox(targetPlane, targetZ, end, placeForBoxZ)
+        #motion.goToPosition(end)
     
-    def doSomething(self):
-        print("Doing something")
-
-    def emergencyStop(self):
-        print("Emergency stop")
-        self.stopped = True
-        self.isIdle = False """
+    
