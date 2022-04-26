@@ -8,7 +8,7 @@ if __name__ == "__main__":
     motion = MotionCore()
 
     if motion.isInitialized:
-        #motion.goToIdle() # only do if it is not already in idle state
+        motion.goToIdle() # only do if it is not already in idle state
 
         targetPlane = [1.12, -2.22, 0]
         #targetPlane = [.5, -2.22, 0]

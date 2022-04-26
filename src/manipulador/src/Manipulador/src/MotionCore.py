@@ -23,9 +23,9 @@ class MotionCore:
         self.E1Length = 0.8
         self.E2Length = .94
 
-        self.alpha = 22
-        self.beta = 127
-        self.gamma = 120
+        self.alpha = 16
+        self.beta = 140
+        self.gamma = 113
 
         if self.fullMotion == False:
             idleAngles = [self.alpha, self.beta]
@@ -44,6 +44,9 @@ class MotionCore:
         self.isInitialized = True
         print("Initialized")
 
+    def lastLinkAngle(self, desiredAngle):
+        return -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]+desiredAngle
+
     def goToIdle(self):
         input("Enter to go to idle")
         targetPose = ArmPose(16.5, 140, 113, 0, 0, 0)
@@ -53,7 +56,7 @@ class MotionCore:
         P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(position)
 
         input("Enter to move to target")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, 0, 0, 0)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), 0, 0, 0)
         self.posePub.publish(targetPose)
         
     
@@ -62,7 +65,7 @@ class MotionCore:
         P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(target)
 
         input("Enter to move to target")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, 0, 0, 0)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), 0, 0, 0)
         self.posePub.publish(targetPose)
 
         if solved:
@@ -81,11 +84,11 @@ class MotionCore:
 
         # wait for keypress
         input("Enter to move grab target")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, targetZ, 0, 1)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), targetZ, 0, 1)
         self.posePub.publish(targetPose)
 
         input("Enter to lift")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, 0, 0, 1)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), 0, 0, 1)
         self.posePub.publish(targetPose)
 
         input("Press Enter to move to box place")
@@ -106,22 +109,20 @@ class MotionCore:
             print("End Effector :", P[-1][:3, 3])
             print("Error :", err)
 
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, 0, 0, 1)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), 0, 0, 1)
         self.posePub.publish(targetPose)
 
         input("Enter to go down")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, placeForBoxZ, 0, 1)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), placeForBoxZ, 0, 1)
         self.posePub.publish(targetPose)
 
         input("Enter to drop box")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, placeForBoxZ, 0, 1)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), placeForBoxZ, 0, 0)
         self.posePub.publish(targetPose)
 
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], -self.virtualArm.ikSolver.angle[0]-self.virtualArm.ikSolver.angle[1]-90, 0, 0, 0)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(-90), 0, 0, 0)
         self.posePub.publish(targetPose)
 
         print("Finished")
 
-        
-        
 

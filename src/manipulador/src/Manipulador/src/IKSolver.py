@@ -80,11 +80,12 @@ class CyclicCoordinateDescentInverseKinematics:
                     self.angle[i] = self.angle[i] + (rot_ang * 180 / math.pi)
 
                     # if it is not the first joint
-                    if i > 0:
-                        if self.angle[i] >= 360:
-                            self.angle[i] = self.angle[i] - 360
-                        if self.angle[i] < 0:
-                            self.angle[i] = 360 + self.angle[i]
+                    #if i > 0:
+                    """ if self.angle[i] >= 360:
+                        self.angle[i] = self.angle[i] - 360
+                    if self.angle[i] < 0:
+                        self.angle[i] = 360 + self.angle[i] """
+                    
                     
             if solved:
                 break
