@@ -1,3 +1,4 @@
+import time
 import rospy
 from unity_msgs.msg import ArmPose
 
@@ -38,6 +39,20 @@ class MotionCore:
         """
         return  - self.virtualArm.ikSolver.angle[0] - self.virtualArm.ikSolver.angle[1] + desiredAngle
 
+    def interpolateCoordinates(self, currentPos, targetPos, steps):
+        """
+        Interpolates from current position to target position in the given number of steps 
+        and saves the intermediate positions in a list
+        """
+        points = []
+        deltaX = (targetPos[0] - currentPos[0]) / steps
+        deltaY = (targetPos[1] - currentPos[1]) / steps
+
+        for i in range(steps):
+            points.append([currentPos[0] + i * deltaX, currentPos[1] + i * deltaY, 0])
+
+        return points
+
     def goToIdle(self, debug=False):
         """
         puts arm in idle position inmediately
@@ -46,7 +61,7 @@ class MotionCore:
         targetPose = ArmPose(16.5, 140, 113, 0, 0, 0)
         self.posePub.publish(targetPose)
 
-    def goToPosition(self, position, lastLinkAngle,debug=False):
+    def goToPosition(self, position, lastLinkAngle, suck, debug=False):
         """
         puts arm in desired position inmediately
         """
@@ -54,77 +69,145 @@ class MotionCore:
 
         if debug: input("Enter to move to target")
         #targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], lastLinkAngle, 0, 0, 0)
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(lastLinkAngle), 0, 0, 0)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(lastLinkAngle), 0, 0, suck)
         self.posePub.publish(targetPose)
         
     
-    def takeBox(self, target, targetZ, placeForBox, placeForBoxZ):
+    def takeBox(self, workSpaceInit,target, targetZ, steps=10, debug=False, sleepTime=.2):
         """
         Takes a box from the pallet and places it in the desired position
         currently used for testing and it is hardcoded
         """
-        #print("Moving to target")
-        P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(target)
 
-        input("Enter to move to target")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
-        self.posePub.publish(targetPose)
+        if debug: input("Enter to move to target")
 
-        if solved:
-            print("\nIK solved\n")
-            print("Iteration :", iteration)
-            print("Angle :", self.virtualArm.ikSolver.angle)
-            print("Target :", target)
-            print("End Effector :", P[-1][:3, 3])
-            print("Error :", err)
-        else:
-            print("\nIK error\n")
-            print("Angle :", self.virtualArm.ikSolver.angle)
-            print("Target :", target)
-            print("End Effector :", P[-1][:3, 3])
-            print("Error :", err)
+        # lineal interpolation from current position to target position and save it in a list
+        interpolation = self.interpolateCoordinates(workSpaceInit, target, steps)
 
+        for point in interpolation:
+            P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
+            self.posePub.publish(targetPose)
+            
+
+            if solved:
+                if debug:
+                    print("\nIK solved\n")
+                    print("Iteration :", iteration)
+                    print("Angle :", self.virtualArm.ikSolver.angle)
+                    print("Target :", target)
+                    print("End Effector :", P[-1][:3, 3])
+                    print("Error :", err)
+            else:
+                print("\nIK error\n")
+                print("Angle :", self.virtualArm.ikSolver.angle)
+                print("Target :", target)
+                print("End Effector :", P[-1][:3, 3])
+                print("Error :", err)
+
+            time.sleep(sleepTime)
+
+        time.sleep(5)
         # wait for keypress
-        input("Enter to move grab target")
+        if debug: input("Enter to grab target")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), targetZ, 0, 1)
         self.posePub.publish(targetPose)
+        time.sleep(2)
 
-        input("Enter to lift")
+        if debug: input("Enter to lift")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
         self.posePub.publish(targetPose)
+        time.sleep(2)
 
-        input("Press Enter to move to box place")
-        #print("Moving to place")
-        P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(placeForBox)
+        if debug: input("Press Enter to move to box place")
+        interpolation = self.interpolateCoordinates(target, workSpaceInit, steps)
 
-        if solved:
-            print("\nIK solved\n")
-            print("Iteration :", iteration)
-            print("Angle :", self.virtualArm.ikSolver.angle)
-            print("Target :", target)
-            print("End Effector :", P[-1][:3, 3])
-            print("Error :", err)
-        else:
-            print("\nIK error\n")
-            print("Angle :", self.virtualArm.ikSolver.angle)
-            print("Target :", target)
-            print("End Effector :", P[-1][:3, 3])
-            print("Error :", err)
+        for point in interpolation:
+            P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
+            self.posePub.publish(targetPose)
+            
 
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
+            if solved:
+                if debug:
+                    print("\nIK solved\n")
+                    print("Iteration :", iteration)
+                    print("Angle :", self.virtualArm.ikSolver.angle)
+                    print("Target :", target)
+                    print("End Effector :", P[-1][:3, 3])
+                    print("Error :", err)
+            else:
+                print("\nIK error\n")
+                print("Angle :", self.virtualArm.ikSolver.angle)
+                print("Target :", target)
+                print("End Effector :", P[-1][:3, 3])
+                print("Error :", err)
+
+            time.sleep(sleepTime)
+
+        """ targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
         self.posePub.publish(targetPose)
 
-        input("Enter to go down")
+        if debug: input("Enter to go down")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 1)
         self.posePub.publish(targetPose)
 
-        input("Enter to drop box")
+        if debug: input("Enter to drop box")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 0)
         self.posePub.publish(targetPose)
 
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
+        self.posePub.publish(targetPose) """
+
+        print("BoxTaken")
+
+    def placeBox(self, idleInit, placeForBox, placeForBoxZ, steps=10, debug=False, sleepTime=.2):
+
+        #time.sleep(2)
+        # lineal interpolation from current position to target position and save it in a list
+        interpolation = self.interpolateCoordinates(idleInit, placeForBox, steps)
+
+        for point in interpolation:
+            P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
+            self.posePub.publish(targetPose)
+            
+
+            if solved:
+                if debug:
+                    print("\nIK solved\n")
+                    print("Iteration :", iteration)
+                    print("Angle :", self.virtualArm.ikSolver.angle)
+                    print("Target :", placeForBox)
+                    print("End Effector :", P[-1][:3, 3])
+                    print("Error :", err)
+            else:
+                print("\nIK error\n")
+                print("Angle :", self.virtualArm.ikSolver.angle)
+                print("Target :", placeForBox)
+                print("End Effector :", P[-1][:3, 3])
+                print("Error :", err)
+
+            time.sleep(sleepTime)
+
+        time.sleep(2)
+        if debug: input("Enter to go down")
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 1)
         self.posePub.publish(targetPose)
 
-        print("Finished")
+        time.sleep(2)
+
+        if debug: input("Enter to drop box")
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 0)
+        self.posePub.publish(targetPose)
+
+        time.sleep(2)
+
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
+        self.posePub.publish(targetPose) 
+
+        time.sleep(2)
+
+        self.goToIdle()
 
 
