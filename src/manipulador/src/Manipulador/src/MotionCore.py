@@ -145,25 +145,9 @@ class MotionCore:
 
             time.sleep(sleepTime)
 
-        """ targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
-        self.posePub.publish(targetPose)
-
-        if debug: input("Enter to go down")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 1)
-        self.posePub.publish(targetPose)
-
-        if debug: input("Enter to drop box")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 0)
-        self.posePub.publish(targetPose)
-
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
-        self.posePub.publish(targetPose) """
-
         print("BoxTaken")
 
     def placeBox(self, idleInit, placeForBox, placeForBoxZ, steps=10, debug=False, sleepTime=.2):
-
-        #time.sleep(2)
         # lineal interpolation from current position to target position and save it in a list
         interpolation = self.interpolateCoordinates(idleInit, placeForBox, steps)
 
@@ -172,7 +156,6 @@ class MotionCore:
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
             self.posePub.publish(targetPose)
             
-
             if solved:
                 if debug:
                     print("\nIK solved\n")
@@ -189,22 +172,30 @@ class MotionCore:
                 print("Error :", err)
 
             time.sleep(sleepTime)
-
-        time.sleep(2)
+            
         if debug: input("Enter to go down")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 1)
-        self.posePub.publish(targetPose)
+        # Solowly go from 0 to placeForBoxZ
+        for i in range(0, steps):
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (placeForBoxZ/steps)*(i+1), 0, 1)
+            self.posePub.publish(targetPose)
+            time.sleep(sleepTime)
 
-        time.sleep(2)
+        time.sleep(1)
 
         if debug: input("Enter to drop box")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 0)
         self.posePub.publish(targetPose)
 
-        time.sleep(2)
+        time.sleep(1)
 
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
-        self.posePub.publish(targetPose) 
+        # slowly go from placeForBoxZ to 0
+        for i in range(0, steps):
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (placeForBoxZ/steps)*(steps-i), 0, 0)
+            self.posePub.publish(targetPose)
+            time.sleep(sleepTime)
+
+        #targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
+        #self.posePub.publish(targetPose) 
 
         time.sleep(2)
 

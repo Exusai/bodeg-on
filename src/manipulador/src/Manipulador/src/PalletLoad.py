@@ -1,47 +1,105 @@
-from . import Box
+from . import Box # when called from main scripts
+#from Box import Box # for testing only this dile
+import matplotlib.pyplot as plt
+import math
+
 class Pallet:
     """
-    this class has to count how many boxes there are in the pallet
-    It has a maximum width, height and depth measured in how many box fit
-    It has to know the size of the boxes that is carring and based on that
-    it must know where to put a box o where to take it from
+    this class has to count how many boxes there are in the pallet and where they are relative to the pallet
+    It has a maximum width, height and depth and a maximum height of boxes
+    It organazes the boxes in a grid with the maximum width, height and depth
+    It stacks grids up to the maximum height of boxes
+    Grid is divided into rows and each row has a given number of boxes
     """
-    def __init__(self, max_width, max_height, max_depth):
+    def __init__(self, max_width, max_depth, max_box_height, type_of_box_per_row):
         self.max_width = max_width
-        self.max_height = max_height
         self.max_depth = max_depth
-        self.boxes = []
+        self.max_height_in_boxes = max_box_height
+        self.boxes = type_of_box_per_row
+        self.gridStack = self.populate_stack(self.max_height_in_boxes)
+        
 
-    def add_box(self, box, boxposition):
+    def populate_stack(self, max_height_in_boxes:int):
         """
-        Adds a box to the pallet
+        Populates the stack of grids of boxes
         """
-        self.boxes.append(box)
+        stack = []
+        # row boxes from bottom to top (I think)
+        #boxes = [Box(.40, .27, .27), Box(.40, .27, .27), Box(.27, .27, .40)] # esta es a configuración de cajas desde la vista superior
+        self.boxes.reverse()
+        # populate stack with rows
+        for i in range(max_height_in_boxes):
+            stack.append(self.populate_grid(self.boxes, 3, i))
+            self.boxes.reverse()
 
-    def remove_box(self, box, boxposition):
-        """
-        Removes a box from the pallet
-        """
-        self.boxes.remove(box)
+        return stack
 
-    def get_free_space(self):
+    def populate_grid(self, boxes:list, rows:int, current_stack:int):
         """
-        Returns the free space in the pallet
+        Populates the grid with boxes
         """
-        free_space = [self.max_width, self.max_height, self.max_depth]
-        for box in self.boxes:
-            free_space[0] -= box.width
-            free_space[1] -= box.height
-            free_space[2] -= box.depth
-        return free_space
-    
-    # get a place to put a new box
-    def get_place(self, box):
+        # check if len of boxes is equal to rows otherwise raise error
+        if len(boxes) != rows:
+            raise ValueError("Number of rows is not equal to number of boxes")
+
+        grid = []
+        i = 0
+        for box in boxes:
+            row = self.populate_row(box, i, current_stack)
+            grid.append(row)
+            i += 1
+        return grid
+        
+
+    def populate_row(self, box:Box, current_row:int, current_stack:int):
         """
-        Returns a place to put a new box
+        Populates a row with as much boxes posible given the width of the pallet
         """
-        free_space = self.get_free_space()
-        if free_space[0] >= box.width and free_space[1] >= box.height and free_space[2] >= box.depth:
-            return [free_space[0] - box.width, free_space[1] - box.height, free_space[2] - box.depth]
+        row = []
+        boxWidth = box.width
+        boxdepth = box.depth
+
+        # quick fix for las cajas de ricolino
+        if self.max_width / boxWidth < 3:
+            boxesInRow = int(math.ceil(self.max_width / boxWidth))
         else:
-            return None
+            boxesInRow = int(self.max_width / boxWidth)
+
+        # find the number of boxes that fit in the pallet
+        #boxesInRow = int(math.ceil(self.max_width / boxWidth))
+        #boxesInRow = int(self.max_width / boxWidth)
+
+        # populate row with boxes
+        for i in range(boxesInRow):
+            # add box to row
+            row.append([i * boxWidth/2 + boxWidth/2, current_row * boxdepth/2 + boxWidth/2, current_stack])
+        
+        return row
+
+
+# uncoment to test
+""" if __name__ == "__main__":
+    pallet = Pallet(1.2, 1, 4,[Box(.40, .27, .27), Box(.40, .27, .27), Box(.27, .27, .40)])
+    #print(pallet.gridStack)
+
+    # plot the grid in 3D
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    for stack in pallet.gridStack:
+        for row in stack:
+            for box in row:
+                # change color of the point based on current stack
+                if box[2] == 1:
+                    color = 'red'
+                elif box[2] == 2:
+                    color = 'green'
+                elif box[2] == 3:
+                    color = 'blue'
+                else:
+                    color = 'black'
+                ax.scatter(box[0], box[1], box[2], c=color, marker='o')
+    # label the axes
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.set_zlabel("Z")
+    plt.show() """
