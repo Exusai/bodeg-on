@@ -42,3 +42,28 @@ class Area:
             return True
         else:
             return False
+
+    def get_points2d(self, steps):
+        """
+        Returns a list of points along the border of the area with a given number of steps per side
+        """
+        # initialize empty list
+        points = []
+
+        # get the points at the bottom reversed
+        for i in range(steps + 1):
+            points.append([self.position[0] + i * self.width / steps, self.position[1]])
+
+        # get the points at the right from top to bottom
+        rightPoints = []
+        for i in range(steps + 1):
+            rightPoints.append([self.position[0] + self.width, self.position[1] - self.width + i * self.height / steps])
+        points.extend(rightPoints[::-1])
+
+        # get points at the bottom reversed
+        bottomPoints = []
+        for i in range(steps + 1):
+            bottomPoints.append([self.position[0] + .5 + i * (self.width-.5) / steps, self.position[1] - self.width])
+        points.extend(bottomPoints[::-1])
+
+        return points
