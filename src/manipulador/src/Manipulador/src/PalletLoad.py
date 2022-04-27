@@ -71,8 +71,10 @@ class Pallet:
 
         # populate row with boxes
         for i in range(boxesInRow):
+            
+
             # add box to row
-            row.append([i * boxWidth/2 + boxWidth/2, current_row * boxdepth/2 + boxWidth/2, current_stack])
+            row.append([i * boxWidth + boxWidth/2, current_row * boxdepth + boxWidth/2, current_stack])
         
         return row
 

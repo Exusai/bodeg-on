@@ -6,7 +6,7 @@ from . Arm import Arm
 
 class MotionCore:
     def __init__(self):
-        print("Initializing")
+        print("Initializing Motion Core")
         self.isInitialized = False
 
         self.fullMotion = False
@@ -31,7 +31,7 @@ class MotionCore:
         self.posePub = rospy.Publisher('arm_pose_target', ArmPose, queue_size=3)
 
         self.isInitialized = True
-        print("Initialized")
+        print("Initialized Motion Core")
 
     def lastLinkAngle(self, desiredAngle):
         """

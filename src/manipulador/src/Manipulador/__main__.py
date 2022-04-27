@@ -2,6 +2,8 @@
 import math
 import time
 
+from matplotlib import pyplot as plt
+
 from src.MotionCore import MotionCore
 from src.Area import Area
 from src.Box import Box
@@ -19,7 +21,7 @@ class Manipulador():
         #self.motion.goToIdle()
 
         # Area of pallet (to be avoided if there are boxes on it)
-        self.palletArea = Area(1.1, 1.3, [0, 1.3/2])
+        self.palletArea = Area(1.2, 1.4, [0, 1.4/2])
         self.palletContourPoints = self.palletArea.get_points2d(10)
 
         #get last point of pallet contour
@@ -27,7 +29,7 @@ class Manipulador():
         
         # Representa los tipos u horientaciones de las caias en cada uno de los pisos del pallet
         # en este caso es el orden de las cajas de ricolino en el pallet (en el nivel inferior)
-        boxArray = [Box(.40, .27, .27), Box(.40, .27, .27), Box(.27, .27, .40)]
+        boxArray = [Box(.40, .30, .30), Box(.40, .30, .30), Box(.30, .30, .40)]
         # idealmente esta cembiará cada vez que vaya por un nuevo producto 
         self.targetPallet = Pallet(1.2, 1, 4, boxArray)
 
@@ -64,52 +66,56 @@ class Manipulador():
             time.sleep(.3)
         
 
-    #def grab_box(self, boxPosition, placeForBox, boxPositionZ, placeForBoxZ):
-    def grab_box(self):
+    def grab_box(self, boxPosition, placeForBox, targetZ, placeForBoxZ):
         """
         Rutine or function to grab a box
         """
         if self.motion.isInitialized:
             #self.motion.goToIdle() # only do if it is not already in idle state
+            # offset boxPosition in x by -.94
+            boxPosition[1] = boxPosition[1] + .94
+            placeForBox[1] = placeForBox[1] + .94
 
-            targetPlane = [1.2, -2.25, 0]
-            #targetPlane = [.5, -2.22, 0]
+            self.motion.takeBox(self.worspaceInitPoint, boxPosition, targetZ)
+            self.fromWorkspaceToIdle(suck=1)
+            self.motion.placeBox(self.palletContourPoints[0], placeForBox, placeForBoxZ)
 
-            end = [.5, 0, 0]
+    def grabAllBoxesFromPallet(self, palletOffset):
+        s = 1
+        leaveBoxLevel = len(self.targetPallet.gridStack)
+        for stack in self.targetPallet.gridStack[::-1]:
+            for row in stack[::-1]:
+                for box in row:
+                    #print("Box coordinates", box)
+                    boxX = box[0] + palletOffset[0]
+                    boxY = box[1] + palletOffset[1]
 
-            # Para la primerca caja bajar -.20m
-            targetZ = -.20
+                    placeForBoxX = box[0]
+                    placeForBoxY = box[1]-.30/2-.5# offset of the pallet 
 
-            # para la primer caja dejar a -.8m
-            placeForBoxZ = -.8
+                    boxPosition = [boxX, boxY, 0]
+                    placeForBox = [placeForBoxX, placeForBoxY, 0]
 
-            # offset targetPlane in x by -.94
-            targetPlane[1] = targetPlane[1] + .94
-            end[1] = end[1] + .94
-
-            # rotate targetPlane by -90 degrees
-            #targetPlane[0] = targetPlane[0] * math.cos(math.radians(-90)) - targetPlane[1] * math.sin(math.radians(-90))
-            #targetPlane[1] = targetPlane[0] * math.sin(math.radians(-90)) + targetPlane[1] * math.cos(math.radians(-90))
-
-            # rotate end by -90 degrees
-            #end[0] = end[0] * math.cos(math.radians(-90)) - end[1] * math.sin(math.radians(-90))
-            #end[1] = end[0] * math.sin(math.radians(-90)) + end[1] * math.cos(math.radians(-90))
-
-            self.motion.takeBox(self.worspaceInitPoint, targetPlane, targetZ)
-            manipulador.fromWorkspaceToIdle(suck=1)
-            self.motion.placeBox(self.palletContourPoints[0], end, placeForBoxZ)
-            #self.motion.placeBox([.1,.5,0], end, placeForBoxZ)
-            #motion.goToPosition(end)
-
+                    # las cajas de ricolino miden .27 de alto entonces se bajan unos .10
+                    targetZ = -(.30/2 * s)
+                    #targetZ = -.10 + box.height * .5
+                    
+                    placeForBoxZ = leaveBoxLevel * -.27 + .25
+                    
+                    self.fromIdleToWorkspace(suck=0)
+                    self.grab_box(boxPosition, placeForBox, targetZ, placeForBoxZ)
+            s += 1
+            leaveBoxLevel -= 1
 
 if __name__ == "__main__":
     manipulador = Manipulador()
-    manipulador.motion.goToIdle(debug=True)
+
     input("Press Enter to start")
+    manipulador.motion.goToIdle()
+    input("Press Enter to start routine")
+    palletOffset = [0, -2.5 - 1+.27] # esta es una de las weas que la cámara debe medir
+    manipulador.grabAllBoxesFromPallet(palletOffset)
     
-    
-    manipulador.fromIdleToWorkspace(suck=0)
-    manipulador.grab_box()
     #manipulador.fromWorkspaceToIdle(suck=0)
     
     #manipulador.motion.goToPosition([1.12, -2.22, 0])
