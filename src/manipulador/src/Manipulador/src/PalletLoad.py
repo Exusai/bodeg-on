@@ -1,6 +1,6 @@
 from . import Box # when called from main scripts
-#from Box import Box # for testing only this dile
-import matplotlib.pyplot as plt
+#from Box import Box # for testing only this file
+#import matplotlib.pyplot as plt
 import math
 
 class Pallet:
@@ -43,15 +43,20 @@ class Pallet:
             raise ValueError("Number of rows is not equal to number of boxes")
 
         grid = []
-        i = 0
-        for box in boxes:
-            row = self.populate_row(box, i, current_stack)
+        for i, box in enumerate(boxes):
+            if i == 0:
+                depthOffset = boxes[i].depth/2
+            elif i == 1:
+                depthOffset = boxes[i].depth/2 + boxes[i-1].depth
+            elif i == 2:
+                depthOffset = boxes[i].depth/2 + boxes[i-1].depth + boxes[i-2].depth
+
+            row = self.populate_row(box, depthOffset,current_stack)
             grid.append(row)
-            i += 1
         return grid
         
 
-    def populate_row(self, box:Box, current_row:int, current_stack:int):
+    def populate_row(self, box:Box, boxDepthOffset, current_stack:int):
         """
         Populates a row with as much boxes posible given the width of the pallet
         """
@@ -71,10 +76,8 @@ class Pallet:
 
         # populate row with boxes
         for i in range(boxesInRow):
-            
-
             # add box to row
-            row.append([i * boxWidth + boxWidth/2, current_row * boxdepth + boxWidth/2, current_stack])
+            row.append([i * (boxWidth + .07) + boxWidth/2,  boxDepthOffset, current_stack])
         
         return row
 

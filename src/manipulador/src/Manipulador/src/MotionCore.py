@@ -108,18 +108,22 @@ class MotionCore:
             time.sleep(sleepTime)
 
         time.sleep(5)
-        # wait for keypress
-        if debug: input("Enter to grab target")
+        # slowly go from placeForBoxZ to 0
+        for i in range(0, steps):
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (targetZ/steps)*(i+1), 0, 1)
+            self.posePub.publish(targetPose)
+            time.sleep(sleepTime)
+
+        """ if debug: input("Enter to grab target")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), targetZ, 0, 1)
-        self.posePub.publish(targetPose)
-        time.sleep(2)
+        self.posePub.publish(targetPose) """
 
         if debug: input("Enter to lift")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
         self.posePub.publish(targetPose)
-        time.sleep(2)
+        time.sleep(1)
 
-        if debug: input("Press Enter to move to box place")
+        if debug: input("Press Enter to move to workSpaceInit")
         interpolation = self.interpolateCoordinates(target, workSpaceInit, steps)
 
         for point in interpolation:
@@ -189,7 +193,9 @@ class MotionCore:
         time.sleep(1)
 
         # slowly go from placeForBoxZ to 0
-        for i in range(0, steps):
+        interpolation = self.interpolateCoordinates(placeForBox, idleInit, steps)
+        for i, point in enumerate(interpolation):
+            P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (placeForBoxZ/steps)*(steps-i), 0, 0)
             self.posePub.publish(targetPose)
             time.sleep(sleepTime)
@@ -197,8 +203,8 @@ class MotionCore:
         #targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
         #self.posePub.publish(targetPose) 
 
-        time.sleep(2)
+        #time.sleep(2)
 
-        self.goToIdle()
+        #self.goToIdle()
 
 

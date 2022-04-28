@@ -21,15 +21,16 @@ class Manipulador():
         #self.motion.goToIdle()
 
         # Area of pallet (to be avoided if there are boxes on it)
-        self.palletArea = Area(1.2, 1.4, [0, 1.4/2])
+        self.palletArea = Area(1.3, 1.6, [0, 1.6/2])
         self.palletContourPoints = self.palletArea.get_points2d(10)
+        #self.palletContourPoints[0] # Este es el idle point "real"
 
         #get last point of pallet contour
         self.worspaceInitPoint = self.palletContourPoints[-1]
         
         # Representa los tipos u horientaciones de las caias en cada uno de los pisos del pallet
         # en este caso es el orden de las cajas de ricolino en el pallet (en el nivel inferior)
-        boxArray = [Box(.40, .30, .30), Box(.40, .30, .30), Box(.30, .30, .40)]
+        boxArray = [Box(.40, .27, .27), Box(.40, .27, .27), Box(.27, .27, .40)]
         # idealmente esta cembiará cada vez que vaya por un nuevo producto 
         self.targetPallet = Pallet(1.2, 1, 4, boxArray)
 
@@ -65,7 +66,6 @@ class Manipulador():
             # wait for a while
             time.sleep(.3)
         
-
     def grab_box(self, boxPosition, placeForBox, targetZ, placeForBoxZ):
         """
         Rutine or function to grab a box
@@ -81,7 +81,7 @@ class Manipulador():
             self.motion.placeBox(self.palletContourPoints[0], placeForBox, placeForBoxZ)
 
     def grabAllBoxesFromPallet(self, palletOffset):
-        s = 1
+        s = 0
         leaveBoxLevel = len(self.targetPallet.gridStack)
         for stack in self.targetPallet.gridStack[::-1]:
             for row in stack[::-1]:
@@ -91,13 +91,13 @@ class Manipulador():
                     boxY = box[1] + palletOffset[1]
 
                     placeForBoxX = box[0]
-                    placeForBoxY = box[1]-.30/2-.5# offset of the pallet 
+                    placeForBoxY = box[1] - .4 # offset of the pallet 
 
                     boxPosition = [boxX, boxY, 0]
                     placeForBox = [placeForBoxX, placeForBoxY, 0]
 
                     # las cajas de ricolino miden .27 de alto entonces se bajan unos .10
-                    targetZ = -(.30/2 * s)
+                    targetZ = - .15 -((.30 * s) + .25)
                     #targetZ = -.10 + box.height * .5
                     
                     placeForBoxZ = leaveBoxLevel * -.27 + .25
@@ -113,9 +113,6 @@ if __name__ == "__main__":
     input("Press Enter to start")
     manipulador.motion.goToIdle()
     input("Press Enter to start routine")
-    palletOffset = [0, -2.5 - 1+.27] # esta es una de las weas que la cámara debe medir
+    palletOffset = [0, -2.5 -.5] # esta es una de las weas que la cámara debe medir
     manipulador.grabAllBoxesFromPallet(palletOffset)
     
-    #manipulador.fromWorkspaceToIdle(suck=0)
-    
-    #manipulador.motion.goToPosition([1.12, -2.22, 0])
