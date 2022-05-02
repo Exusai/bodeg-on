@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import math
 
 # Robot Link Length Parameter
-link = [1.1, .8, .94]
+link = [1.1, .9, 1]
 # Robot Initial Joint Values (degree)
 angle = [0, 0, 0, 0]
 # Target End of Effector Position
@@ -157,6 +157,7 @@ def main():
         start_point = P[i]
         end_point = P[i+1]
         ax.plot([start_point[0,3], end_point[0,3]], [start_point[1,3], end_point[1,3]], linewidth=5)
+        ax.set_aspect('equal', adjustable='box')
         # draw_axis(ax, scale=5, A=P[i+1], draw_2d=True)
     plt.show()
 

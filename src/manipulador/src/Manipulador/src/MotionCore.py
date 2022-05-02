@@ -13,12 +13,13 @@ class MotionCore:
         
         # Lenght of the links of the arm
         self.E0Length = 1.1
-        self.E1Length = 0.8
-        self.E2Length = .94
-
-        self.alpha = 16
-        self.beta = 140
-        self.gamma = 113
+        self.E1Length = 0.9
+        self.E2Length = 1
+        
+        # Idle angles of the arm
+        self.alpha = 0
+        self.beta = 132
+        self.gamma = 137.5
 
         if self.fullMotion == False:
             idleAngles = [self.alpha, self.beta]
@@ -39,7 +40,7 @@ class MotionCore:
         """
         return  - self.virtualArm.ikSolver.angle[0] - self.virtualArm.ikSolver.angle[1] + desiredAngle
 
-    def interpolateCoordinates(self, currentPos, targetPos, steps):
+    def interpolateCoordinates(self, currentPos, targetPos, steps, linear = False):
         """
         Interpolates from current position to target position in the given number of steps 
         and saves the intermediate positions in a list
@@ -48,8 +49,14 @@ class MotionCore:
         deltaX = (targetPos[0] - currentPos[0]) / steps
         deltaY = (targetPos[1] - currentPos[1]) / steps
 
-        for i in range(steps):
-            points.append([currentPos[0] + i * deltaX, currentPos[1] + i * deltaY, 0])
+        if linear:
+            for i in range(int(steps/2)):
+                points.append([currentPos[0], currentPos[1] + deltaY * i, 0])
+            for i in range(int(steps/2)):
+                points.append([currentPos[0] + deltaX * i, currentPos[1] + deltaY * (int(steps/2)), 0])
+        else:
+            for i in range(steps):
+                points.append([currentPos[0] + i * deltaX, currentPos[1] + i * deltaY, 0])
 
         return points
 
@@ -58,7 +65,7 @@ class MotionCore:
         puts arm in idle position inmediately
         """
         if debug: input("Enter to go to idle")
-        targetPose = ArmPose(16.5, 140, 113, 0, 0, 0)
+        targetPose = ArmPose(self.alpha, self.beta, self.gamma, 0, 0, 0)
         self.posePub.publish(targetPose)
 
     def goToPosition(self, position, lastLinkAngle, suck, debug=False):
@@ -107,7 +114,7 @@ class MotionCore:
 
             time.sleep(sleepTime)
 
-        time.sleep(5)
+        time.sleep(3)
         # slowly go from placeForBoxZ to 0
         for i in range(0, steps):
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (targetZ/steps)*(i+1), 0, 1)
@@ -124,7 +131,7 @@ class MotionCore:
         time.sleep(1)
 
         if debug: input("Press Enter to move to workSpaceInit")
-        interpolation = self.interpolateCoordinates(target, workSpaceInit, steps)
+        interpolation = self.interpolateCoordinates(target, workSpaceInit, steps, linear=True)
 
         for point in interpolation:
             P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
@@ -151,9 +158,9 @@ class MotionCore:
 
         print("BoxTaken")
 
-    def placeBox(self, idleInit, placeForBox, placeForBoxZ, steps=10, debug=False, sleepTime=.2):
+    def placeBox(self, workSpaceInit, placeForBox, placeForBoxZ, steps=10, debug=False, sleepTime=.2):
         # lineal interpolation from current position to target position and save it in a list
-        interpolation = self.interpolateCoordinates(idleInit, placeForBox, steps)
+        interpolation = self.interpolateCoordinates(workSpaceInit, placeForBox, steps)
 
         for point in interpolation:
             P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
@@ -193,10 +200,15 @@ class MotionCore:
         time.sleep(1)
 
         # slowly go from placeForBoxZ to 0
-        interpolation = self.interpolateCoordinates(placeForBox, idleInit, steps)
+        interpolation = self.interpolateCoordinates(placeForBox, workSpaceInit, steps)
+        for i in range (0, steps):
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (placeForBoxZ/steps)*(steps-i), 0, 0)
+            self.posePub.publish(targetPose)
+            time.sleep(sleepTime)
+
         for i, point in enumerate(interpolation):
             P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
-            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (placeForBoxZ/steps)*(steps-i), 0, 0)
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
             self.posePub.publish(targetPose)
             time.sleep(sleepTime)
 

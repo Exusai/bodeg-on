@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import math
 
 # Robot Link Length Parameter
-link = [1.1, 0.8]
+link = [1.1, 0.9]
 # Robot Initial Joint Values (degree)
 angle = [26.60 + 90, 119]
 # Target End of Effector Position
