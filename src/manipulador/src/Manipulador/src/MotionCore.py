@@ -63,10 +63,10 @@ class MotionCore:
 
         return points
 
-    def performInterpolation(self, interpolation, sleepTime, target, suck, debug):
+    def performInterpolation(self, interpolation, sleepTime, target, suck, z, debug):
         for point in interpolation:
             P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
-            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, suck)
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), z, 0, suck)
             self.posePub.publish(targetPose)
             
 
@@ -118,7 +118,7 @@ class MotionCore:
         # lineal interpolation from current position to target position and save it in a list
         interpolation = self.interpolateCoordinates(workSpaceInit, target, steps)
 
-        self.performInterpolation(interpolation, sleepTime, target, 0, debug)
+        self.performInterpolation(interpolation, sleepTime, target, 0, 0, debug)
 
         time.sleep(7)
         # slowly go from placeForBoxZ to 0
@@ -138,7 +138,7 @@ class MotionCore:
         if debug: input("Press Enter to move to workSpaceInit")
         interpolation = self.interpolateCoordinates(target, workSpaceInit, steps, linear=True)
 
-        self.performInterpolation(interpolation, sleepTime, target, 1, debug)
+        self.performInterpolation(interpolation, sleepTime, target, 1, 0, debug)
 
         print("BoxTaken")
 
@@ -146,7 +146,7 @@ class MotionCore:
         # lineal interpolation from current position to target position and save it in a list
         interpolation = self.interpolateCoordinates(workSpaceInit, placeForBox, steps, linear=True)
 
-        self.performInterpolation(interpolation, sleepTime, placeForBox, 1, debug)
+        self.performInterpolation(interpolation, sleepTime, placeForBox, 1, 0, debug)
             
         if debug: input("Enter to go down")
         # Solowly go from 0 to placeForBoxZ
@@ -186,35 +186,30 @@ class MotionCore:
     def takeBoxVertical(self, workSpaceInit, target, targetZ, steps=10, debug=False, sleepTime=.2):
         """
         Takes a box from the pallet and places it in the desired position
-        currently used for testing and it is hardcoded
+        using the vertical suckers
         """
 
         if debug: input("Enter to move to target")
 
         # lineal interpolation from current position to target position and save it in a list
         interpolation = self.interpolateCoordinates(workSpaceInit, target, steps)
+        self.performInterpolation(interpolation, sleepTime, target, 0, 0, debug)
 
-        self.performInterpolation(interpolation, sleepTime, target, 0, debug)
-
-        time.sleep(7)
-        # slowly go from placeForBoxZ to 0
-        for i in range(0, steps):
-            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (targetZ/steps)*(i+1), 0, 1)
-            self.posePub.publish(targetPose)
-            time.sleep(sleepTime)
-
-        time.sleep(1)
-
-        if debug: input("Enter to lift")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), targetZ, 0, 0)
         self.posePub.publish(targetPose)
+
+        time.sleep(5)
+        
+        interpolation = self.interpolateCoordinates(target, [target[0], target[1] - .1], steps)
+        self.performInterpolation(interpolation, sleepTime, target, 0, targetZ, debug)
+
         
         time.sleep(1)
 
         if debug: input("Press Enter to move to workSpaceInit")
         interpolation = self.interpolateCoordinates(target, workSpaceInit, steps, linear=True)
 
-        self.performInterpolation(interpolation, sleepTime, target, 1, debug)
+        self.performInterpolation(interpolation, sleepTime, target, 1, targetZ,debug)
 
         print("BoxTaken")
 

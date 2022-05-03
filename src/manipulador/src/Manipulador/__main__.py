@@ -88,6 +88,19 @@ class Manipulador():
             self.motion.takeBox(self.offloadPoint, boxPosition, targetZ)
             #self.fromWS2Offload(suck=1)
             self.motion.placeBox(self.offloadPoint, placeForBox, placeForBoxZ)
+            
+    def grab_box_vertical(self, boxPosition, placeForBox, targetZ, placeForBoxZ):
+        """
+        Rutine or function to grab a box vertically
+        """
+        if self.motion.isInitialized:
+            # offset boxPosition in x by -.94
+            boxPosition[1] = boxPosition[1] + 1
+            placeForBox[1] = placeForBox[1] + 1
+
+            self.motion.takeBoxVertical(self.offloadPoint, boxPosition, targetZ)
+            #self.fromWS2Offload(suck=1)
+            self.motion.placeBox(self.offloadPoint, placeForBox, placeForBoxZ)
 
     def grabAllBoxesFromPallet(self, palletOffset):
         s = 0
@@ -132,24 +145,28 @@ class Manipulador():
             for box in row:
                 #print("Box coordinates", box)
                 boxX = box[0] + palletOffset[0]
-                boxY = box[1] + palletOffset[1] + .27
+                boxY = box[1] + palletOffset[1] + .6
+
+                placeForBoxX = box[0] + .228
+                placeForBoxY = box[1] -.43 + .48 # offset of the pallet 
 
                 boxPosition = [boxX, boxY, 0]
-                placeForBoxX = box[0] + .228
-                placeForBoxY = box[1] -.44
                 placeForBox = [placeForBoxX, placeForBoxY, 0]
 
-                targetZ = - .3 -((.30 * s) + .25)
+                # las cajas de ricolino miden .27 de alto entonces se bajan unos .10
+                targetZ = - .15 -((.30 * s) + .18)
+                #targetZ = -.10 + box.height * .5
 
+                placeForBoxZ = leaveBoxLevel * -.27 + .25
+                
                 if self.sendTargetPosition:
                     targetVis = ArmTarget(boxX, boxY, targetZ, 0)
                     #targetVis = ArmTarget(placeForBoxX, placeForBoxY, placeForBoxZ, 0)
                     #targetVis = ArmTarget(box[0], box[1], targetZ, 0)
                     self.pub.publish(targetVis)
-
                 
-
-                input("Press Enter to continue...")
+                self.grab_box_vertical(boxPosition, placeForBox, targetZ, placeForBoxZ)
+                #input("Press Enter to continue...")
 
 
 if __name__ == "__main__":
@@ -160,9 +177,9 @@ if __name__ == "__main__":
     manipulador.motion.goToPosition(manipulador.offloadPoint, 270, 0)
 
     palletOffset = [.228, -2] # esta es una de las weas que la cámara debe medir
-    #manipulador.grabFirstLevenBoxesVertically(palletOffset)
+    manipulador.grabFirstLevenBoxesVertically(palletOffset)
 
     # Codigo para tomar todas las cajas
-    input("Press Enter to start routine")
-    manipulador.grabAllBoxesFromPallet(palletOffset)
+    #input("Press Enter to start routine")
+    #manipulador.grabAllBoxesFromPallet(palletOffset)
     
