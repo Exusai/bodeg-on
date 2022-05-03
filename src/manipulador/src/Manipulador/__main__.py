@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import math
 import time
+import rospy
+from unity_msgs.msg import ArmTarget
 
 from matplotlib import pyplot as plt
 
@@ -20,12 +22,13 @@ class Manipulador():
         self.motion = MotionCore()
         #self.motion.goToIdle()
 
-        # Area of pallet (to be avoided if there are boxes on it)
-        #self.palletArea = Area(1.3, 1.6, [0, 1.6/2])
-        #self.palletContourPoints = self.palletArea.get_points2d(10)
-        #self.palletContourPoints[0] # Este es el idle point "real"
-        #get last point of pallet contour
-        #self.worspaceInitPoint = self.palletContourPoints[-1]
+        self.sendTargetPosition = True # used for debuging
+
+        if self.sendTargetPosition:
+            TOPIC_NAME = 'target'
+            #rospy.init_node(NODE_NAME, anonymous=True)
+            self.pub = rospy.Publisher(TOPIC_NAME, ArmTarget, queue_size=2)
+
 
         # Workspace point (from where the robot takes boxes)
         self.worspaceInitPoint = [.32+.5, .5, 0]
@@ -80,13 +83,12 @@ class Manipulador():
         Rutine or function to grab a box
         """
         if self.motion.isInitialized:
-            #self.motion.goToIdle() # only do if it is not already in idle state
             # offset boxPosition in x by -.94
             boxPosition[1] = boxPosition[1] + 1
             placeForBox[1] = placeForBox[1] + 1
 
-            self.motion.takeBox(self.worspaceInitPoint, boxPosition, targetZ)
-            self.fromWS2Offload(suck=1)
+            self.motion.takeBox(self.offloadPoint, boxPosition, targetZ)
+            #self.fromWS2Offload(suck=1)
             self.motion.placeBox(self.offloadPoint, placeForBox, placeForBoxZ)
 
     def grabAllBoxesFromPallet(self, palletOffset):
@@ -99,8 +101,8 @@ class Manipulador():
                     boxX = box[0] + palletOffset[0]
                     boxY = box[1] + palletOffset[1]
 
-                    placeForBoxX = box[0] + .32
-                    placeForBoxY = box[1] -.4 # offset of the pallet 
+                    placeForBoxX = box[0] + .228
+                    placeForBoxY = box[1] -.5 # offset of the pallet 
 
                     boxPosition = [boxX, boxY, 0]
                     placeForBox = [placeForBoxX, placeForBoxY, 0]
@@ -108,11 +110,19 @@ class Manipulador():
                     # las cajas de ricolino miden .27 de alto entonces se bajan unos .10
                     targetZ = - .15 -((.30 * s) + .25)
                     #targetZ = -.10 + box.height * .5
-                    
+
                     placeForBoxZ = leaveBoxLevel * -.27 + .25
                     
-                    self.fromOffload2WS(suck=0)
+                    if self.sendTargetPosition:
+                        targetVis = ArmTarget(boxX, boxY, targetZ, 0)
+                        #targetVis = ArmTarget(placeForBoxX, placeForBoxY, placeForBoxZ, 0)
+                        #targetVis = ArmTarget(box[0], box[1], targetZ, 0)
+                        self.pub.publish(targetVis)
+
+                    #self.fromOffload2WS(suck=0)
                     self.grab_box(boxPosition, placeForBox, targetZ, placeForBoxZ)
+
+                    #input("Press Enter to continue...")
             s += 1
             leaveBoxLevel -= 1
 
@@ -124,6 +134,6 @@ if __name__ == "__main__":
     manipulador.motion.goToPosition(manipulador.offloadPoint, 270, 0)
     #manipulador.motion.goToPosition(manipulador.worspaceInitPoint, 270, 0)
     input("Press Enter to start routine")
-    palletOffset = [.32, -1.5 -.5] # esta es una de las weas que la cámara debe medir
+    palletOffset = [.228, -2] # esta es una de las weas que la cámara debe medir
     manipulador.grabAllBoxesFromPallet(palletOffset)
     

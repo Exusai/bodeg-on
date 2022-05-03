@@ -50,12 +50,15 @@ class MotionCore:
         deltaY = (targetPos[1] - currentPos[1]) / steps
 
         if linear:
-            for i in range(int(steps/2)):
+            for i in range(steps):
+                i = i + 1
                 points.append([currentPos[0], currentPos[1] + deltaY * i, 0])
-            for i in range(int(steps/2)):
-                points.append([currentPos[0] + deltaX * i, currentPos[1] + deltaY * (int(steps/2)), 0])
+            for i in range(steps):
+                i = i + 1
+                points.append([currentPos[0] + deltaX * i, currentPos[1] + deltaY * steps, 0])
         else:
             for i in range(steps):
+                i = i + 1
                 points.append([currentPos[0] + i * deltaX, currentPos[1] + i * deltaY, 0])
 
         return points
@@ -80,7 +83,7 @@ class MotionCore:
         self.posePub.publish(targetPose)
         
     
-    def takeBox(self, workSpaceInit,target, targetZ, steps=10, debug=False, sleepTime=.2):
+    def takeBox(self, workSpaceInit, target, targetZ, steps=10, debug=False, sleepTime=.2):
         """
         Takes a box from the pallet and places it in the desired position
         currently used for testing and it is hardcoded
@@ -114,7 +117,7 @@ class MotionCore:
 
             time.sleep(sleepTime)
 
-        time.sleep(3)
+        time.sleep(5)
         # slowly go from placeForBoxZ to 0
         for i in range(0, steps):
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (targetZ/steps)*(i+1), 0, 1)
