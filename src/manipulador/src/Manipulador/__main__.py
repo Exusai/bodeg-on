@@ -22,7 +22,7 @@ class Manipulador():
         self.motion = MotionCore()
         #self.motion.goToIdle()
 
-        self.sendTargetPosition = False # used for debuging
+        self.sendTargetPosition = True # used for debuging
 
         if self.sendTargetPosition:
             TOPIC_NAME = 'target'
@@ -100,7 +100,7 @@ class Manipulador():
                     boxY = box[1] + palletOffset[1]
 
                     placeForBoxX = box[0] + .228
-                    placeForBoxY = box[1] -.44 # offset of the pallet 
+                    placeForBoxY = box[1] -.43 # offset of the pallet 
 
                     boxPosition = [boxX, boxY, 0]
                     placeForBox = [placeForBoxX, placeForBoxY, 0]
@@ -124,14 +124,45 @@ class Manipulador():
             s += 1
             leaveBoxLevel -= 1
 
+    def grabFirstLevenBoxesVertically(self, palletOffset):
+        s = 0
+        leaveBoxLevel = len(self.targetPallet.gridStack)
+        stack = self.targetPallet.gridStack[::-1][0]
+        for row in stack[::-1]:
+            for box in row:
+                #print("Box coordinates", box)
+                boxX = box[0] + palletOffset[0]
+                boxY = box[1] + palletOffset[1] + .27
+
+                boxPosition = [boxX, boxY, 0]
+                placeForBoxX = box[0] + .228
+                placeForBoxY = box[1] -.44
+                placeForBox = [placeForBoxX, placeForBoxY, 0]
+
+                targetZ = - .3 -((.30 * s) + .25)
+
+                if self.sendTargetPosition:
+                    targetVis = ArmTarget(boxX, boxY, targetZ, 0)
+                    #targetVis = ArmTarget(placeForBoxX, placeForBoxY, placeForBoxZ, 0)
+                    #targetVis = ArmTarget(box[0], box[1], targetZ, 0)
+                    self.pub.publish(targetVis)
+
+                
+
+                input("Press Enter to continue...")
+
+
 if __name__ == "__main__":
     manipulador = Manipulador()
 
     input("Press Enter to start")
     manipulador.motion.goToIdle()
     manipulador.motion.goToPosition(manipulador.offloadPoint, 270, 0)
-    #manipulador.motion.goToPosition(manipulador.worspaceInitPoint, 270, 0)
-    input("Press Enter to start routine")
+
     palletOffset = [.228, -2] # esta es una de las weas que la cámara debe medir
+    #manipulador.grabFirstLevenBoxesVertically(palletOffset)
+
+    # Codigo para tomar todas las cajas
+    input("Press Enter to start routine")
     manipulador.grabAllBoxesFromPallet(palletOffset)
     
