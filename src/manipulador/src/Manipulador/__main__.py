@@ -22,7 +22,7 @@ class Manipulador():
         self.motion = MotionCore()
         #self.motion.goToIdle()
 
-        self.sendTargetPosition = True # used for debuging
+        self.sendTargetPosition = False # used for debuging
 
         if self.sendTargetPosition:
             TOPIC_NAME = 'target'
@@ -46,10 +46,9 @@ class Manipulador():
         # idealmente esta cembiará cada vez que vaya por un nuevo producto 
         self.targetPallet = Pallet(1.2, 1, 4, boxArray)
 
-    def fromWS2Offload(self, suck):
-        """
-        Function that moves the robot along the contour of the pallet area
-        """
+    """ def fromWS2Offload(self, suck):
+        #Function that moves the robot along the contour of the pallet area
+        
         # get main points along pallet area
         #points = self.palletArea.get_points2d(10)
         
@@ -61,9 +60,8 @@ class Manipulador():
             time.sleep(.2)
 
     def fromOffload2WS(self, suck):
-        """
-        Function that moves the robot along the contour of the pallet area
-        """
+        #Function that moves the robot along the contour of the pallet area
+        
         # get main points along pallet area
         #points = self.palletArea.get_points2d(10)
         
@@ -76,7 +74,7 @@ class Manipulador():
             # move to point
             self.motion.goToPosition([point[0], point[1], 0], 270, suck)
             # wait for a while
-            time.sleep(.2)
+            time.sleep(.2) """
         
     def grab_box(self, boxPosition, placeForBox, targetZ, placeForBoxZ):
         """
@@ -102,7 +100,7 @@ class Manipulador():
                     boxY = box[1] + palletOffset[1]
 
                     placeForBoxX = box[0] + .228
-                    placeForBoxY = box[1] -.5 # offset of the pallet 
+                    placeForBoxY = box[1] -.44 # offset of the pallet 
 
                     boxPosition = [boxX, boxY, 0]
                     placeForBox = [placeForBoxX, placeForBoxY, 0]

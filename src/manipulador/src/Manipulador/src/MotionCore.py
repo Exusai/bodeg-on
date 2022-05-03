@@ -117,20 +117,19 @@ class MotionCore:
 
             time.sleep(sleepTime)
 
-        time.sleep(5)
+        time.sleep(7)
         # slowly go from placeForBoxZ to 0
         for i in range(0, steps):
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (targetZ/steps)*(i+1), 0, 1)
             self.posePub.publish(targetPose)
             time.sleep(sleepTime)
 
-        """ if debug: input("Enter to grab target")
-        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), targetZ, 0, 1)
-        self.posePub.publish(targetPose) """
+        time.sleep(1)
 
         if debug: input("Enter to lift")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 1)
         self.posePub.publish(targetPose)
+        
         time.sleep(1)
 
         if debug: input("Press Enter to move to workSpaceInit")
@@ -163,7 +162,7 @@ class MotionCore:
 
     def placeBox(self, workSpaceInit, placeForBox, placeForBoxZ, steps=10, debug=False, sleepTime=.2):
         # lineal interpolation from current position to target position and save it in a list
-        interpolation = self.interpolateCoordinates(workSpaceInit, placeForBox, steps)
+        interpolation = self.interpolateCoordinates(workSpaceInit, placeForBox, steps, linear=True)
 
         for point in interpolation:
             P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
@@ -194,13 +193,13 @@ class MotionCore:
             self.posePub.publish(targetPose)
             time.sleep(sleepTime)
 
-        time.sleep(1)
+        time.sleep(.5)
 
         if debug: input("Enter to drop box")
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), placeForBoxZ, 0, 0)
         self.posePub.publish(targetPose)
 
-        time.sleep(1)
+        time.sleep(.5)
 
         # slowly go from placeForBoxZ to 0
         interpolation = self.interpolateCoordinates(placeForBox, workSpaceInit, steps)

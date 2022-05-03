@@ -117,9 +117,11 @@ def onclick(event):
 
     # if target is in the second quadrant
     if target[0] < -width/2:
-        target[0] += .94
+        #target[0] += 1
+        target[1] -= 1
     else:
-        target[0] -= .94
+        #target[0] -= 1
+        target[1] += 1
     
     print("Target Position : ", target)
     plt.cla()
