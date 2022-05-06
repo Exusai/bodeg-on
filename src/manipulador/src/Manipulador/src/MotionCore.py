@@ -120,7 +120,7 @@ class MotionCore:
 
         self.performInterpolation(interpolation, sleepTime, target, 0, 0, debug)
 
-        time.sleep(7)
+        time.sleep(5)
         # slowly go from placeForBoxZ to 0
         for i in range(0, steps):
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (targetZ/steps)*(i+1), 0, 1)
