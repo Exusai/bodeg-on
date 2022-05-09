@@ -24,7 +24,7 @@ con la vista superior en unity.
 class Manipulador():
     def __init__(self):
         self.ready = False
-        self.model = tf.keras.models.load_model('Manipulador/src/Models/modelTest.h5', compile = False)
+        self.model = tf.keras.models.load_model('Manipulador/src/Models/modelTest_2.h5', compile = False)
         self.motion = MotionCore()
         #self.motion.goToIdle()
 
@@ -253,6 +253,6 @@ if __name__ == "__main__":
     #manipulador.grabFirstLevenBoxesVertically(palletOffset)
 
     # Codigo para tomar todas las cajas
-    input("Press Enter to start routine")
-    manipulador.grabAllBoxesFromPallet(palletOffset)
+    #input("Press Enter to start routine")
+    #manipulador.grabAllBoxesFromPallet(palletOffset)
     
