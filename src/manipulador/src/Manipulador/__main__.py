@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import math
 import time
-from turtle import pos
 import rospy
 from unity_msgs.msg import ArmTarget
 from sensor_msgs.msg import CompressedImage
