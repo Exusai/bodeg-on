@@ -16,3 +16,6 @@ Web Video Server:
 - http://localhost:8080/stream_viewer?topic=/image_raw o http://localhost:8080/stream?topic=/image_raw
 
 La UI deberá ser iniciada de otro modo
+API:
+- `curl -X POST http://0.0.0.0:5000/goToOffloadPoint`
+
