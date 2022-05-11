@@ -290,7 +290,5 @@ def takeBoxesHoriz():
 # ============================================================================== #
 
 if __name__ == "__main__":
-    #time.sleep(5) # esperaa cargar libs y todo eso antes de empezar
-
     print("***************************INICIALIZADO*****************************")
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=False, port=5000)
