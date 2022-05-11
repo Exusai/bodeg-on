@@ -9,10 +9,15 @@ import cv2 as cv
 import numpy as np
 import tensorflow as tf
 
+from flask import Flask, redirect, url_for, request, render_template, Response, jsonify
+
 from src.MotionCore import MotionCore
 from src.Area import Area
 from src.Box import Box
 from src.PalletLoad import Pallet
+
+
+app = Flask(__name__)
 
 """
 Para todas las coordenadas que se usan aqui, unity usa z como el eje vertical, x como el eje horizontal.
@@ -66,7 +71,7 @@ class Manipulador():
                           for i in np.arange(0, 256)]).astype("uint8")
         im = cv.LUT(im, table)
 
-        self.DispImg = im.copy()
+        #self.DispImg = im.copy()
 
         # show image
         #cv.imshow("img", im)
@@ -224,21 +229,27 @@ class Manipulador():
                 #input("Press Enter to continue...")
 
 
-if __name__ == "__main__":
-    manipulador = Manipulador()
+# ============================================================================== #
+# Server Code                                                                    #
+# ============================================================================== #
+manipulador = Manipulador()
 
-    time.sleep(5) # esperaa cargar libs y todo eso antes de empezar
+@app.route('/')
+def index():
+    return "Robot endpoint"
 
-    print("***************************INICIALIZADO*****************************")
-    input("Press Enter to start")
-    #manipulador.motion.goToIdle()
+@app.route('/goToOffloadPoint', methods=['POST'])
+def goToOffloadPoint():
     manipulador.motion.goToPosition(manipulador.offloadPoint, 270, 0)
-    
+    return "OK"
+
+@app.route('/takeBoxesVert', methods=['POST'])
+def takeBoxesVert():
     # El pallet tiene su origen en el centro de la tarima, pero para estimar posicion de las cajas el origen esta en su esquina inf izq
     offsetX = .228 # este se tanteo, pero es para que el origen quede en la parte de la izuqierda
     offsetY = -.5 # se le quita 50 cm para que el origen quede en la parte inferior
 
-    input("Press Enter to run inference")
+    #input("Press Enter to run inference")
     estimatedPos, estimatedSize = manipulador.get_pallet_position()
 
     # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
@@ -249,9 +260,37 @@ if __name__ == "__main__":
 
     # para tomar todas las cajas de arriba con las ventosas verticales
     #input("Press Enter to start routine")
-    #manipulador.grabFirstLevenBoxesVertically(palletOffset)
+    manipulador.grabFirstLevenBoxesVertically(palletOffset)
+    return "OK"
+
+@app.route('/takeBoxesHoriz', methods=['POST'])
+def takeBoxesHoriz():
+    # El pallet tiene su origen en el centro de la tarima, pero para estimar posicion de las cajas el origen esta en su esquina inf izq
+    offsetX = .228 # este se tanteo, pero es para que el origen quede en la parte de la izuqierda
+    offsetY = -.5 # se le quita 50 cm para que el origen quede en la parte inferior
+
+    #input("Press Enter to run inference")
+    estimatedPos, estimatedSize = manipulador.get_pallet_position()
+
+    # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
+    posTarimaY = -estimatedPos[2] #-2
+    posTarimaX = estimatedPos[0] #0 #.828001 -.45
+    
+    palletOffset = [offsetX + posTarimaX, offsetY + posTarimaY] # esta es una de las weas que la cámara debe medir
 
     # Codigo para tomar todas las cajas
     #input("Press Enter to start routine")
-    #manipulador.grabAllBoxesFromPallet(palletOffset)
-    
+    manipulador.grabAllBoxesFromPallet(palletOffset)
+
+    return "OK"
+
+
+# ============================================================================== #
+# Server Code End                                                                #
+# ============================================================================== #
+
+if __name__ == "__main__":
+    #time.sleep(5) # esperaa cargar libs y todo eso antes de empezar
+
+    print("***************************INICIALIZADO*****************************")
+    app.run(host='0.0.0.0', debug=True, port=5000)
