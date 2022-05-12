@@ -270,11 +270,14 @@ def takeBoxesHoriz():
     offsetY = -.5 # se le quita 50 cm para que el origen quede en la parte inferior
 
     #input("Press Enter to run inference")
-    estimatedPos, estimatedSize = manipulador.get_pallet_position()
+    #estimatedPos, estimatedSize = manipulador.get_pallet_position()
 
     # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
-    posTarimaY = -estimatedPos[2] #-2
-    posTarimaX = estimatedPos[0] #0 #.828001 -.45
+    #posTarimaY = -estimatedPos[2] #-2
+    #posTarimaX = estimatedPos[0] #0 #.828001 -.45
+
+    posTarimaY = -2
+    posTarimaX = 0 #.828001 -.45
     
     palletOffset = [offsetX + posTarimaX, offsetY + posTarimaY] # esta es una de las weas que la cámara debe medir
 
@@ -291,4 +294,4 @@ def takeBoxesHoriz():
 
 if __name__ == "__main__":
     print("***************************INICIALIZADO*****************************")
-    app.run(host='0.0.0.0', debug=False, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
