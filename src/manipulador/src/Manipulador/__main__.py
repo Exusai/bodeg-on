@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from crypt import methods
+import io
 import math
 import time
 import rospy
@@ -9,13 +11,12 @@ import cv2 as cv
 import numpy as np
 import tensorflow as tf
 
-from flask import Flask, redirect, url_for, request, render_template, Response, jsonify
+from flask import Flask, send_file, request
 
 from src.MotionCore import MotionCore
 from src.Area import Area
 from src.Box import Box
 from src.PalletLoad import Pallet
-
 
 app = Flask(__name__)
 
@@ -28,7 +29,7 @@ con la vista superior en unity.
 class Manipulador():
     def __init__(self):
         self.ready = False
-        self.model = tf.keras.models.load_model('Manipulador/src/Models/modelTest_2.h5', compile = False)
+        self.model = tf.keras.models.load_model('Manipulador/src/Models/PalletPoseEstimationv3.h5', compile = False)
         self.motion = MotionCore()
         #self.motion.goToIdle()
 
@@ -56,7 +57,22 @@ class Manipulador():
         # idealmente esta cembiará cada vez que vaya por un nuevo producto 
         self.targetPallet = Pallet(1.2, 1, 4, boxArray)
 
-        
+        # offset de place for box, se midieron en simulacion
+        self.offsetPlaceForBoxX = .228
+        self.offsetPlaceForBoxY = .43
+
+        # pallet offsets for pose estimation
+        # El pallet tiene su origen en el centro de la tarima, pero para estimar posicion de las cajas el origen esta en su esquina inf izq
+        self.offsetX = .228 # este se tanteo, pero es para que el origen quede en la parte de la izuqierda
+        self.offsetY = -.5 # se le quita 50 cm para que el origen quede en la parte inferior
+
+        # posición de la tarima (después se estimará)
+        self.posTarimaY = -2
+        self.posTarimaX = 0
+
+        # variable que se le pasa a las funciones para empezar a tomar cajas
+        self.palletOffset = [self.offsetX + self.posTarimaX, self.offsetY + self.posTarimaY]
+
         rospy.Subscriber("/gripper_cam/compressed", CompressedImage, self.callback_Vis)
 
         self.ready = True
@@ -69,42 +85,36 @@ class Manipulador():
         invGamma = 1.0 / 2.2
         table = np.array([((i / 255.0) ** invGamma) * 255
                           for i in np.arange(0, 256)]).astype("uint8")
+        
         im = cv.LUT(im, table)
-
-        #self.DispImg = im.copy()
-
-        # show image
-        #cv.imshow("img", im)
-        #cv.waitKey(1)
-
         im = tf.cast(im, tf.float32)
         im = (im/255)
         im = tf.expand_dims(im, axis=0)
-
-        #print(im.shape)
-
+        
         self.RecivedImage = im
         
     def get_pallet_position(self):
         """
         Function that runs inference on the model and returns the position of the pallet
         """
-        cv.imshow("img", self.DispImg)
-        cv.waitKey(1000) # 1s para ver img
-        cv.destroyAllWindows()
+        #cv.imshow("img", self.DispImg)
+        #cv.waitKey(1000) # 1s para ver img
+        #cv.destroyAllWindows()
 
         # run inference
         prediction = self.model.predict(self.RecivedImage)
 
         position = prediction[0][0:3]
-        size = prediction[0][3:6]
+
+        # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
+        self.posTarimaY = -position[2]
+        self.posTarimaX = position[0]
+        
+        self.palletOffset = [self.offsetX + self.posTarimaX, self.offsetY + self.posTarimaY]
         
         print("Estimated Postion (x,y,z):", position)
-        print("Estimated Size (x,y,z):", size)
 
-        return position, size
-
-
+        return position
 
     """ def fromWS2Offload(self, suck):
         #Function that moves the robot along the contour of the pallet area
@@ -162,18 +172,18 @@ class Manipulador():
             #self.fromWS2Offload(suck=1)
             self.motion.placeBox(self.offloadPoint, placeForBox, placeForBoxZ)
 
-    def grabAllBoxesFromPallet(self, palletOffset):
+    def grabAllBoxesFromPallet(self):
         s = 0
         leaveBoxLevel = len(self.targetPallet.gridStack)
         for stack in self.targetPallet.gridStack[::-1]:
             for row in stack[::-1]:
                 for box in row:
                     #print("Box coordinates", box)
-                    boxX = box[0] + palletOffset[0]
-                    boxY = box[1] + palletOffset[1]
+                    boxX = box[0] + self.palletOffset[0]
+                    boxY = box[1] + self.palletOffset[1]
 
-                    placeForBoxX = box[0] + .228
-                    placeForBoxY = box[1] -.43 # offset of the pallet 
+                    placeForBoxX = box[0] + self.offsetPlaceForBoxX
+                    placeForBoxY = box[1] - self.offsetPlaceForBoxY # offset of the pallet 
 
                     boxPosition = [boxX, boxY, 0]
                     placeForBox = [placeForBoxX, placeForBoxY, 0]
@@ -196,19 +206,20 @@ class Manipulador():
                     #input("Press Enter to continue...")
             s += 1
             leaveBoxLevel -= 1
+            if s == 2: break
 
-    def grabFirstLevenBoxesVertically(self, palletOffset):
+    def grabFirstLevelBoxesVertically(self):
         s = 0
         leaveBoxLevel = len(self.targetPallet.gridStack)
         stack = self.targetPallet.gridStack[::-1][0]
         for row in stack[::-1]:
             for box in row:
                 #print("Box coordinates", box)
-                boxX = box[0] + palletOffset[0]
-                boxY = box[1] + palletOffset[1] + .6
+                boxX = box[0] + self.palletOffset[0]
+                boxY = box[1] + self.palletOffset[1] + .6 # este último es para que el brazo baje un poco y use ventosas verticales
 
-                placeForBoxX = box[0] + .228
-                placeForBoxY = box[1] -.43 + .48 # offset of the pallet 
+                placeForBoxX = box[0] + self.offsetPlaceForBoxX
+                placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48 # este último es el offset del brazo para tomar con ventosas verticales
 
                 boxPosition = [boxX, boxY, 0]
                 placeForBox = [placeForBoxX, placeForBoxY, 0]
@@ -228,6 +239,38 @@ class Manipulador():
                 self.grab_box_vertical(boxPosition, placeForBox, targetZ, placeForBoxZ)
                 #input("Press Enter to continue...")
 
+    def grabNboxesFromPallet(self, n, horizontal):
+        s = 0
+        leaveBoxLevel = len(self.targetPallet.gridStack)
+        takenBoxes = 0
+        stack = self.targetPallet.gridStack[::-1][0]
+        for row in stack[::-1]:
+            for box in row:
+                boxX = box[0] + self.palletOffset[0]
+
+                placeForBoxX = box[0] + self.offsetPlaceForBoxX
+
+                if horizontal:
+                    boxY = box[1] + self.palletOffset[1]
+                    placeForBoxY = box[1] - self.offsetPlaceForBoxY
+                    targetZ = - .15 -((.30 * s) + .25)
+                else:
+                    boxY = box[1] + self.palletOffset[1] + .6
+                    placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48
+                    targetZ = - .15 -((.30 * s) + .18)
+                
+                boxPosition = [boxX, boxY, 0]
+                placeForBox = [placeForBoxX, placeForBoxY, 0]
+                placeForBoxZ = leaveBoxLevel * -.27 + .25
+
+                if horizontal:
+                    self.grab_box(boxPosition, placeForBox, targetZ, placeForBoxZ)
+                else:
+                    self.grab_box_vertical(boxPosition, placeForBox, targetZ, placeForBoxZ)
+                
+                takenBoxes += 1
+                if takenBoxes == n:
+                    return
 
 # ============================================================================== #
 # Server Code                                                                    #
@@ -241,53 +284,47 @@ def index():
 @app.route('/goToOffloadPoint', methods=['POST'])
 def goToOffloadPoint():
     manipulador.motion.goToPosition(manipulador.offloadPoint, 270, 0)
-    return "OK"
+    return "Posición de inicio y descarga alcanzada"
+
+@app.route('/estimatePosition', methods=['POST'])
+def estimatePalletPostion():
+    estimatedPos = manipulador.get_pallet_position()
+    return "Posición de la tarima estimada: \n" + str(estimatedPos)
 
 @app.route('/takeBoxesVert', methods=['POST'])
 def takeBoxesVert():
-    # El pallet tiene su origen en el centro de la tarima, pero para estimar posicion de las cajas el origen esta en su esquina inf izq
-    offsetX = .228 # este se tanteo, pero es para que el origen quede en la parte de la izuqierda
-    offsetY = -.5 # se le quita 50 cm para que el origen quede en la parte inferior
-
-    #input("Press Enter to run inference")
-    estimatedPos, estimatedSize = manipulador.get_pallet_position()
-
-    # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
-    posTarimaY = -estimatedPos[2] #-2
-    posTarimaX = estimatedPos[0] #0 #.828001 -.45
-    
-    palletOffset = [offsetX + posTarimaX, offsetY + posTarimaY] # esta es una de las weas que la cámara debe medir
-
-    # para tomar todas las cajas de arriba con las ventosas verticales
-    #input("Press Enter to start routine")
-    manipulador.grabFirstLevenBoxesVertically(palletOffset)
-    return "OK"
+    manipulador.grabFirstLevelBoxesVertically()
+    return "Primer Nivel de cajas tomadas"
 
 @app.route('/takeBoxesHoriz', methods=['POST'])
 def takeBoxesHoriz():
-    # El pallet tiene su origen en el centro de la tarima, pero para estimar posicion de las cajas el origen esta en su esquina inf izq
-    offsetX = .228 # este se tanteo, pero es para que el origen quede en la parte de la izuqierda
-    offsetY = -.5 # se le quita 50 cm para que el origen quede en la parte inferior
+    manipulador.grabAllBoxesFromPallet()
+    return "Tomadas todas las cajas posibles"
 
-    #input("Press Enter to run inference")
-    #estimatedPos, estimatedSize = manipulador.get_pallet_position()
+@app.route('/take', methods=['POST'])
+def take():
+    numberOfBoxesToTake = request.args.get('n')
+    horizontalSucker = request.args.get('horizontal')
 
-    # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
-    #posTarimaY = -estimatedPos[2] #-2
-    #posTarimaX = estimatedPos[0] #0 #.828001 -.45
+    print("Taking", numberOfBoxesToTake, "boxes")
+    print("Horizontal:", horizontalSucker)
 
-    posTarimaY = -2
-    posTarimaX = 0 #.828001 -.45
+    if horizontalSucker == "true":
+        horizontalSucker = True
+    else:
+        horizontalSucker = False
     
-    palletOffset = [offsetX + posTarimaX, offsetY + posTarimaY] # esta es una de las weas que la cámara debe medir
+    numberOfBoxesToTake = int(numberOfBoxesToTake)
 
-    # Codigo para tomar todas las cajas
-    #input("Press Enter to start routine")
-    manipulador.grabAllBoxesFromPallet(palletOffset)
+    manipulador.grabNboxesFromPallet(numberOfBoxesToTake, horizontalSucker)
+    return "Tomadas " + str(numberOfBoxesToTake) + " cajas"
 
-    return "OK"
-
-
+@app.route('/getPalletDist', methods=['get'])
+def getPalletdist():
+    # TODO: change pallet box type
+    img = manipulador.targetPallet.pallet_plot()
+    img.seek(0)
+    return send_file(img, mimetype='image/png')
 # ============================================================================== #
 # Server Code End                                                                #
 # ============================================================================== #

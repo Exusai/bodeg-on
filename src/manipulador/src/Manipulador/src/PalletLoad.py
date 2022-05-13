@@ -1,7 +1,9 @@
+import io
 from . import Box # when called from main scripts
 #from Box import Box # for testing only this file
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import math
+import numpy as np
 
 class Pallet:
     """
@@ -80,6 +82,62 @@ class Pallet:
             row.append([i * (boxWidth + .03) + boxWidth/2,  boxDepthOffset, current_stack])
         
         return row
+
+    def pallet_plot(self):
+        """
+        Plots the pallet with the boxes
+        """
+        # create figure
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        for stack in self.gridStack:
+            for row in stack:
+                for box in row:
+                    # change color of the point based on current stack
+                    if box[2] == 0: color = 'r'
+                    elif box[2] == 1: color = 'g'
+                    elif box[2] == 2: color = 'b'
+                    elif box[2] == 3: color = 'y'
+                    elif box[2] == 4: color = 'c'
+                    elif box[2] == 5: color = 'm'
+                    else: color = 'black'
+
+                    # plot box
+                    ax.scatter(box[0], box[1], box[2], c=color)
+
+        # make squred image
+        fig.set_size_inches(5, 5)
+
+        # label axes
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+
+        # set a gray background
+        ax.w_xaxis.set_pane_color((1.0, 0.7, 0.7, 0.8))
+        ax.w_yaxis.set_pane_color((0.7, 1.0, 0.7, 0.8))
+        ax.w_zaxis.set_pane_color((0.7, 0.7, 1.0, 0.8))
+
+        # zoom on the plot
+        ax.set_xlim3d(0, self.max_width)
+        ax.set_ylim3d(0, self.max_depth)
+        ax.set_zlim3d(0, self.max_height_in_boxes)
+
+        # set axes limits
+        ax.set_xlim(0, self.max_width)
+        ax.set_ylim(0, self.max_depth)
+        ax.set_zlim(0, self.max_height_in_boxes-1)
+
+        # set a nice view
+        ax.view_init(elev=20., azim=45)
+
+        # convert plot to image
+        fig.canvas.draw()
+        # return canvas as io.BytesIO object
+        buf = io.BytesIO()
+        fig.canvas.print_png(buf)
+        plt.close(fig)
+        return buf
 
 
 # uncoment to test
