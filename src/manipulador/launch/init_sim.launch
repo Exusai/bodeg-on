@@ -1,0 +1,9 @@
+<launch>
+    <include file="$(find ros_tcp_endpoint)/launch/endpoint.launch" />
+    <!-- image_transport republish compressed in:=/gripper_cam out:=/image_raw -->
+    <node name="image_decompress" pkg="image_transport" type="republish" args = "compressed in:=gripper_cam out:=/image_raw" output="screen">
+    </node>
+    <!-- rosrun web_video_server web_video_server -->
+    <node name="stream_server" pkg="web_video_server" type="web_video_server" output="screen">
+    </node>
+</launch>
