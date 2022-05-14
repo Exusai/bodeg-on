@@ -202,7 +202,6 @@ class MotionCore:
         
         interpolation = self.interpolateCoordinates(target, [target[0], target[1] - .1], steps)
         self.performInterpolation(interpolation, sleepTime, target, 0, targetZ, debug)
-
         
         time.sleep(1)
 
@@ -212,5 +211,3 @@ class MotionCore:
         self.performInterpolation(interpolation, sleepTime, target, 1, targetZ,debug)
 
         print("BoxTaken")
-
-

@@ -87,6 +87,8 @@ class Manipulador():
                           for i in np.arange(0, 256)]).astype("uint8")
         
         im = cv.LUT(im, table)
+        # convert from bgr to rgb
+        im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
         im = tf.cast(im, tf.float32)
         im = (im/255)
         im = tf.expand_dims(im, axis=0)
@@ -284,6 +286,7 @@ def index():
 @app.route('/goToOffloadPoint', methods=['POST'])
 def goToOffloadPoint():
     manipulador.motion.goToPosition(manipulador.offloadPoint, 270, 0)
+    time.sleep(5)
     return "Posición de inicio y descarga alcanzada"
 
 @app.route('/estimatePosition', methods=['POST'])
