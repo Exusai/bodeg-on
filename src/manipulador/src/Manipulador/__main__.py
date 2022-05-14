@@ -257,7 +257,7 @@ class Manipulador():
                     placeForBoxY = box[1] - self.offsetPlaceForBoxY
                     targetZ = - .15 -((.30 * s) + .25)
                 else:
-                    boxY = box[1] + self.palletOffset[1] + .6
+                    boxY = box[1] + self.palletOffset[1] + .5
                     placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48
                     targetZ = - .15 -((.30 * s) + .18)
                 
