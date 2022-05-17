@@ -59,7 +59,7 @@ class Manipulador():
 
         # offset de place for box, se midieron en simulacion
         self.offsetPlaceForBoxX = .228
-        self.offsetPlaceForBoxY = .43
+        self.offsetPlaceForBoxY = .43 # .43 original antes de compensar para demostración de recoger todas las cajas
 
         # pallet offsets for pose estimation
         # El pallet tiene su origen en el centro de la tarima, pero para estimar posicion de las cajas el origen esta en su esquina inf izq
@@ -109,8 +109,8 @@ class Manipulador():
         position = prediction[0][0:3]
 
         # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
-        self.posTarimaY = -position[2]
-        self.posTarimaX = position[0]
+        self.posTarimaY = -position[2] #-2
+        self.posTarimaX = position[0] #0
         
         self.palletOffset = [self.offsetX + self.posTarimaX, self.offsetY + self.posTarimaY]
         
@@ -227,7 +227,7 @@ class Manipulador():
                 placeForBox = [placeForBoxX, placeForBoxY, 0]
 
                 # las cajas de ricolino miden .27 de alto entonces se bajan unos .10
-                targetZ = - .15 -((.30 * s) + .18)
+                targetZ = - .15 -((.30 * s) + .10)
                 #targetZ = -.10 + box.height * .5
 
                 placeForBoxZ = leaveBoxLevel * -.27 + .25
@@ -245,34 +245,34 @@ class Manipulador():
         s = 0
         leaveBoxLevel = len(self.targetPallet.gridStack)
         takenBoxes = 0
-        stack = self.targetPallet.gridStack[::-1][0]
-        for row in stack[::-1]:
-            for box in row:
-                boxX = box[0] + self.palletOffset[0]
+        for stack in self.targetPallet.gridStack[::-1]:
+            for row in stack[::-1]:
+                for box in row:
+                    boxX = box[0] + self.palletOffset[0]
 
-                placeForBoxX = box[0] + self.offsetPlaceForBoxX
+                    placeForBoxX = box[0] + self.offsetPlaceForBoxX
 
-                if horizontal:
-                    boxY = box[1] + self.palletOffset[1]
-                    placeForBoxY = box[1] - self.offsetPlaceForBoxY
-                    targetZ = - .15 -((.30 * s) + .25)
-                else:
-                    boxY = box[1] + self.palletOffset[1] + .5
-                    placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48
-                    targetZ = - .15 -((.30 * s) + .18)
-                
-                boxPosition = [boxX, boxY, 0]
-                placeForBox = [placeForBoxX, placeForBoxY, 0]
-                placeForBoxZ = leaveBoxLevel * -.27 + .25
+                    if horizontal:
+                        boxY = box[1] + self.palletOffset[1]
+                        placeForBoxY = box[1] - self.offsetPlaceForBoxY
+                        targetZ = - .15 -((.30 * s) + .25)
+                    else:
+                        boxY = box[1] + self.palletOffset[1] + .5
+                        placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48
+                        targetZ = - .15 -((.30 * s) + .15)
+                    
+                    boxPosition = [boxX, boxY, 0]
+                    placeForBox = [placeForBoxX, placeForBoxY, 0]
+                    placeForBoxZ = leaveBoxLevel * -.27 + .25
 
-                if horizontal:
-                    self.grab_box(boxPosition, placeForBox, targetZ, placeForBoxZ)
-                else:
-                    self.grab_box_vertical(boxPosition, placeForBox, targetZ, placeForBoxZ)
-                
-                takenBoxes += 1
-                if takenBoxes == n:
-                    return
+                    if horizontal:
+                        self.grab_box(boxPosition, placeForBox, targetZ, placeForBoxZ)
+                    else:
+                        self.grab_box_vertical(boxPosition, placeForBox, targetZ, placeForBoxZ)
+                    
+                    takenBoxes += 1
+                    if takenBoxes == n:
+                        return
 
 # ============================================================================== #
 # Server Code                                                                    #
