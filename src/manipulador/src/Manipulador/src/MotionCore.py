@@ -125,7 +125,7 @@ class MotionCore:
         for i in range(0, steps):
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (targetZ/steps)*(i+1), 0, 1)
             self.posePub.publish(targetPose)
-            time.sleep(sleepTime)
+            time.sleep(sleepTime*1.5)
 
         time.sleep(1)
 
@@ -168,7 +168,7 @@ class MotionCore:
         for i in range (0, steps):
             targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), (placeForBoxZ/steps)*(steps-i), 0, 0)
             self.posePub.publish(targetPose)
-            time.sleep(sleepTime)
+            time.sleep(sleepTime*1.5)
 
         for i, point in enumerate(interpolation):
             P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)

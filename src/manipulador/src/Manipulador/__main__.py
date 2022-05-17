@@ -256,10 +256,11 @@ class Manipulador():
                         boxY = box[1] + self.palletOffset[1]
                         placeForBoxY = box[1] - self.offsetPlaceForBoxY
                         targetZ = - .15 -((.30 * s) + .25)
+
                     else:
                         boxY = box[1] + self.palletOffset[1] + .5
                         placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48
-                        targetZ = - .15 -((.30 * s) + .15)
+                        targetZ = - .15 -((.35 * s) + .15)
                     
                     boxPosition = [boxX, boxY, 0]
                     placeForBox = [placeForBoxX, placeForBoxY, 0]
@@ -273,6 +274,8 @@ class Manipulador():
                     takenBoxes += 1
                     if takenBoxes == n:
                         return
+            s += 1
+            leaveBoxLevel -= 1
 
 # ============================================================================== #
 # Server Code                                                                    #
