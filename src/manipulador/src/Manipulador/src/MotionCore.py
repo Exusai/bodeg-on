@@ -106,7 +106,6 @@ class MotionCore:
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(lastLinkAngle), 0, 0, suck)
         self.posePub.publish(targetPose)
         
-    
     def takeBox(self, workSpaceInit, target, targetZ, steps=10, debug=False, sleepTime=.2):
         """
         Takes a box from the pallet and places it in the desired position
@@ -192,16 +191,21 @@ class MotionCore:
         if debug: input("Enter to move to target")
 
         # lineal interpolation from current position to target position and save it in a list
-        interpolation = self.interpolateCoordinates(workSpaceInit, target, steps)
-        self.performInterpolation(interpolation, sleepTime, target, 0, 0, debug)
+        interpolation = self.interpolateCoordinates(workSpaceInit, [target[0], target[1] + .3, target[2]], steps*2, linear=True) #offset added to avoid collitions when too close to shelf
+        self.performInterpolation(interpolation, sleepTime, [target[0], target[1] + .3, target[2]], 0, 0, debug) #offset added to avoid collitions when too close to 
 
+        # goes down I think
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), targetZ, 0, 0)
         self.posePub.publish(targetPose)
 
-        time.sleep(5)
+        # falta un paso para llegar a target sin offset
+        interpolation = self.interpolateCoordinates([target[0], target[1] + .3, target[2]], target, steps, linear=False) #offset added to avoid collitions when too close to shelf
+        self.performInterpolation(interpolation, sleepTime, target, 0, targetZ, debug) #offset added to avoid collitions when too close to 
+
+        time.sleep(2)
         
-        interpolation = self.interpolateCoordinates(target, [target[0], target[1] - .1], steps)
-        self.performInterpolation(interpolation, sleepTime, target, 0, targetZ, debug)
+        interpolation = self.interpolateCoordinates(target, [target[0], target[1] -.1], steps)
+        self.performInterpolation(interpolation, sleepTime, [target[0], target[1] -.1], 0, targetZ, debug)
         
         time.sleep(1)
 

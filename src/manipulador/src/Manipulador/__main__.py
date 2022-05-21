@@ -29,7 +29,7 @@ con la vista superior en unity.
 class Manipulador():
     def __init__(self):
         self.ready = False
-        self.model = tf.keras.models.load_model('Manipulador/src/Models/PalletPoseEstimationv3.h5', compile = False)
+        self.model = tf.keras.models.load_model('Manipulador/src/Models/PalletPoseEstimationWShelving_V2.h5', compile = False)
         self.motion = MotionCore()
         #self.motion.goToIdle()
 
@@ -73,6 +73,9 @@ class Manipulador():
         # variable que se le pasa a las funciones para empezar a tomar cajas
         self.palletOffset = [self.offsetX + self.posTarimaX, self.offsetY + self.posTarimaY]
 
+        # variable para contar cuantas cajas se han tomado
+        self.boxesTaken = 0
+
         rospy.Subscriber("/gripper_cam/compressed", CompressedImage, self.callback_Vis)
 
         self.ready = True
@@ -87,6 +90,7 @@ class Manipulador():
                           for i in np.arange(0, 256)]).astype("uint8")
         
         im = cv.LUT(im, table)
+        
         # convert from bgr to rgb
         im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
         im = tf.cast(im, tf.float32)
@@ -106,11 +110,16 @@ class Manipulador():
         # run inference
         prediction = self.model.predict(self.RecivedImage)
 
-        position = prediction[0][0:3]
+        #position = prediction[0][0:3]
+        position = prediction[0]
 
         # el signo negativo es por que la distancia se mide de la cam hacia el pallet pero en sim el marco de referencia lo hace negativo
-        self.posTarimaY = -position[2] #-2
-        self.posTarimaX = position[0] #0
+        #self.posTarimaY = -position[2] #-2
+        #self.posTarimaX = position[0] #0
+
+        self.posTarimaY = -position[1] #-2
+        #sospecho que este de abajo también esta invertido, pero no estoy seguro
+        self.posTarimaX = -position[0] #0
         
         self.palletOffset = [self.offsetX + self.posTarimaX, self.offsetY + self.posTarimaY]
         
@@ -147,7 +156,35 @@ class Manipulador():
             self.motion.goToPosition([point[0], point[1], 0], 270, suck)
             # wait for a while
             time.sleep(.2) """
-        
+
+    def get_place_for_box(self, horizontal: bool):
+        """
+        this funtion returns a place for the box based on how many boxes have been taken
+        """
+        ### TEMRPORAL solution, get the same target pallet and iterate over it ###
+        # this must be ineficient, but it works for now
+        c = 0
+        leaveBoxLevel = len(self.targetPallet.gridStack)
+        for stack in self.targetPallet.gridStack[::-1]:
+            for row in stack[::-1]:
+                for box in row:
+                    placeForBoxX = box[0] + self.offsetPlaceForBoxX
+
+                    if horizontal:
+                        placeForBoxY = box[1] - self.offsetPlaceForBoxY
+
+                    else:
+                        placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48
+                    
+                    placeForBox = [placeForBoxX, placeForBoxY, 0]
+                    placeForBoxZ = leaveBoxLevel * -.27 + .25
+
+                    if c == self.boxesTaken:
+                        return placeForBox, placeForBoxZ
+                    c += 1
+            leaveBoxLevel -= 1
+
+
     def grab_box(self, boxPosition, placeForBox, targetZ, placeForBoxZ):
         """
         Rutine or function to grab a box
@@ -205,6 +242,8 @@ class Manipulador():
                     #self.fromOffload2WS(suck=0)
                     self.grab_box(boxPosition, placeForBox, targetZ, placeForBoxZ)
 
+                    self.boxesTaken += 1 # para moverse en el stack que ests cargando en el pallet
+
                     #input("Press Enter to continue...")
             s += 1
             leaveBoxLevel -= 1
@@ -218,7 +257,7 @@ class Manipulador():
             for box in row:
                 #print("Box coordinates", box)
                 boxX = box[0] + self.palletOffset[0]
-                boxY = box[1] + self.palletOffset[1] + .6 # este último es para que el brazo baje un poco y use ventosas verticales
+                boxY = box[1] + self.palletOffset[1] + .5 # este último es para que el brazo baje un poco y use ventosas verticales
 
                 placeForBoxX = box[0] + self.offsetPlaceForBoxX
                 placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48 # este último es el offset del brazo para tomar con ventosas verticales
@@ -241,30 +280,27 @@ class Manipulador():
                 self.grab_box_vertical(boxPosition, placeForBox, targetZ, placeForBoxZ)
                 #input("Press Enter to continue...")
 
+                self.boxesTaken += 1 # para moverse en el stack que ests cargando en el pallet
+
     def grabNboxesFromPallet(self, n, horizontal):
         s = 0
-        leaveBoxLevel = len(self.targetPallet.gridStack)
         takenBoxes = 0
         for stack in self.targetPallet.gridStack[::-1]:
             for row in stack[::-1]:
                 for box in row:
                     boxX = box[0] + self.palletOffset[0]
 
-                    placeForBoxX = box[0] + self.offsetPlaceForBoxX
-
                     if horizontal:
                         boxY = box[1] + self.palletOffset[1]
-                        placeForBoxY = box[1] - self.offsetPlaceForBoxY
                         targetZ = - .15 -((.30 * s) + .25)
 
                     else:
                         boxY = box[1] + self.palletOffset[1] + .5
-                        placeForBoxY = box[1] - self.offsetPlaceForBoxY + .48
                         targetZ = - .15 -((.35 * s) + .15)
                     
                     boxPosition = [boxX, boxY, 0]
-                    placeForBox = [placeForBoxX, placeForBoxY, 0]
-                    placeForBoxZ = leaveBoxLevel * -.27 + .25
+
+                    placeForBox, placeForBoxZ = self.get_place_for_box(horizontal)
 
                     if horizontal:
                         self.grab_box(boxPosition, placeForBox, targetZ, placeForBoxZ)
@@ -272,10 +308,10 @@ class Manipulador():
                         self.grab_box_vertical(boxPosition, placeForBox, targetZ, placeForBoxZ)
                     
                     takenBoxes += 1
+                    self.boxesTaken += 1 # para moverse en el stack que ests cargando en el pallet
                     if takenBoxes == n:
                         return
             s += 1
-            leaveBoxLevel -= 1
 
 # ============================================================================== #
 # Server Code                                                                    #
