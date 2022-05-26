@@ -19,3 +19,17 @@ La UI deberá ser iniciada de otro modo
 API:
 - `curl -X POST http://0.0.0.0:5000/goToOffloadPoint`
 
+# videos
+https://user-images.githubusercontent.com/47704357/170529145-65fb159d-e98d-4a26-a011-6847f195734c.mp4
+
+https://user-images.githubusercontent.com/47704357/170529161-f1be2d1e-a9ba-4278-a159-093f2b93602d.mp4
+
+https://user-images.githubusercontent.com/47704357/170529168-92c62eed-38e0-48e4-a91e-f7dbda7e281e.mp4
+
+https://user-images.githubusercontent.com/47704357/170529178-72fc167c-9dd7-48d2-a71e-a65ee2dd233d.mp4
+
+
+
+
+https://user-images.githubusercontent.com/47704357/170530414-e110a1dc-acf2-4b17-8f04-46f130e872e7.mp4
+
