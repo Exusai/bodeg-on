@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "message_runtime".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "ros_tcp_endpoint"
-PROJECT_SPACE_DIR = "/home/faber/bodeg-on/devel"
+PROJECT_SPACE_DIR = "/home/ubuntu/bodeg-on/devel"
 PROJECT_VERSION = "0.7.0"

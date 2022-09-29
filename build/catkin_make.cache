@@ -1,2 +1,2 @@
 ROS-TCP-Endpoint:manipulador:orderpicker:unity_msgs
--DCATKIN_DEVEL_PREFIX=/home/faber/bodeg-on/devel -DCMAKE_INSTALL_PREFIX=/home/faber/bodeg-on/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/ubuntu/bodeg-on/devel -DCMAKE_INSTALL_PREFIX=/home/ubuntu/bodeg-on/install -G Unix Makefiles

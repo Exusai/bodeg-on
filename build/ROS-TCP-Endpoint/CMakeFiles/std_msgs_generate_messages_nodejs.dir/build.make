@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/faber/bodeg-on/src
+CMAKE_SOURCE_DIR = /home/ubuntu/bodeg-on/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/faber/bodeg-on/build
+CMAKE_BINARY_DIR = /home/ubuntu/bodeg-on/build
 
 # Utility rule file for std_msgs_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build: std_msg
 .PHONY : ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 
 ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean:
-	cd /home/faber/bodeg-on/build/ROS-TCP-Endpoint && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/ubuntu/bodeg-on/build/ROS-TCP-Endpoint && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean
 
 ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/faber/bodeg-on/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/faber/bodeg-on/src /home/faber/bodeg-on/src/ROS-TCP-Endpoint /home/faber/bodeg-on/build /home/faber/bodeg-on/build/ROS-TCP-Endpoint /home/faber/bodeg-on/build/ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ubuntu/bodeg-on/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ubuntu/bodeg-on/src /home/ubuntu/bodeg-on/src/ROS-TCP-Endpoint /home/ubuntu/bodeg-on/build /home/ubuntu/bodeg-on/build/ROS-TCP-Endpoint /home/ubuntu/bodeg-on/build/ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ROS-TCP-Endpoint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/depend
 

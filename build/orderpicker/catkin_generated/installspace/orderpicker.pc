@@ -1,4 +1,4 @@
-prefix=/home/faber/bodeg-on/install
+prefix=/home/ubuntu/bodeg-on/install
 
 Name: orderpicker
 Description: Description of orderpicker

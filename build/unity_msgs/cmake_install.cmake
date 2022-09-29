@@ -1,8 +1,8 @@
-# Install script for directory: /home/faber/bodeg-on/src/unity_msgs
+# Install script for directory: /home/ubuntu/bodeg-on/src/unity_msgs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/faber/bodeg-on/install")
+  set(CMAKE_INSTALL_PREFIX "/home/ubuntu/bodeg-on/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,61 +39,61 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/msg" TYPE FILE FILES
-    "/home/faber/bodeg-on/src/unity_msgs/msg/ArmPose.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/ArmTarget.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerDirection.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg"
-    "/home/faber/bodeg-on/src/unity_msgs/msg/GripperSuck.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/ArmPose.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/OrderPickerPosition.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/ArmTarget.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/OrderPickerDirection.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/OrderPickerCameraRotation.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/OrderPickerLifter.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/OrderPickerVelocity.msg"
+    "/home/ubuntu/bodeg-on/src/unity_msgs/msg/GripperSuck.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/cmake" TYPE FILE FILES "/home/faber/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgs-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/cmake" TYPE FILE FILES "/home/ubuntu/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgs-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/faber/bodeg-on/devel/include/unity_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/ubuntu/bodeg-on/devel/include/unity_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/faber/bodeg-on/devel/share/roseus/ros/unity_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/ubuntu/bodeg-on/devel/share/roseus/ros/unity_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/faber/bodeg-on/devel/share/gennodejs/ros/unity_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/ubuntu/bodeg-on/devel/share/gennodejs/ros/unity_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/ubuntu/bodeg-on/devel/lib/python3/dist-packages/unity_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/faber/bodeg-on/devel/lib/python3/dist-packages/unity_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/ubuntu/bodeg-on/devel/lib/python3/dist-packages/unity_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/faber/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgs.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ubuntu/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgs.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/cmake" TYPE FILE FILES "/home/faber/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgs-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/cmake" TYPE FILE FILES "/home/ubuntu/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgs-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs/cmake" TYPE FILE FILES
-    "/home/faber/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgsConfig.cmake"
-    "/home/faber/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgsConfig-version.cmake"
+    "/home/ubuntu/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgsConfig.cmake"
+    "/home/ubuntu/bodeg-on/build/unity_msgs/catkin_generated/installspace/unity_msgsConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs" TYPE FILE FILES "/home/faber/bodeg-on/src/unity_msgs/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unity_msgs" TYPE FILE FILES "/home/ubuntu/bodeg-on/src/unity_msgs/package.xml")
 endif()
 

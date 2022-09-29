@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/faber/bodeg-on/build'
+export PWD='/home/ubuntu/bodeg-on/build'

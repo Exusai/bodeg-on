@@ -1,4 +1,4 @@
-prefix=/home/faber/bodeg-on/install
+prefix=/home/ubuntu/bodeg-on/install
 
 Name: unity_msgs
 Description: Description of unity_msgs

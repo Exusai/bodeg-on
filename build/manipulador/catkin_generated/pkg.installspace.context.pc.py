@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "manipulador"
-PROJECT_SPACE_DIR = "/home/faber/bodeg-on/install"
+PROJECT_SPACE_DIR = "/home/ubuntu/bodeg-on/install"
 PROJECT_VERSION = "0.0.0"

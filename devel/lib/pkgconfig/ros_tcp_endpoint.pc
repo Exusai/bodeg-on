@@ -1,4 +1,4 @@
-prefix=/home/faber/bodeg-on/devel
+prefix=/home/ubuntu/bodeg-on/devel
 
 Name: ros_tcp_endpoint
 Description: Description of ros_tcp_endpoint

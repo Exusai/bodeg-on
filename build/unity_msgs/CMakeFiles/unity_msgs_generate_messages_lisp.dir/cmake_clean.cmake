@@ -1,12 +1,12 @@
 file(REMOVE_RECURSE
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmPose.lisp"
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmTarget.lisp"
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/GripperSuck.lisp"
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerCameraRotation.lisp"
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerDirection.lisp"
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerLifter.lisp"
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerPosition.lisp"
-  "/home/faber/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerVelocity.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmPose.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/ArmTarget.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/GripperSuck.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerCameraRotation.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerDirection.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerLifter.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerPosition.lisp"
+  "/home/ubuntu/bodeg-on/devel/share/common-lisp/ros/unity_msgs/msg/OrderPickerVelocity.lisp"
   "CMakeFiles/unity_msgs_generate_messages_lisp"
 )
 

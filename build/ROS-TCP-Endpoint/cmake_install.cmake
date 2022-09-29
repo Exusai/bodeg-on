@@ -1,8 +1,8 @@
-# Install script for directory: /home/faber/bodeg-on/src/ROS-TCP-Endpoint
+# Install script for directory: /home/ubuntu/bodeg-on/src/ROS-TCP-Endpoint
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/faber/bodeg-on/install")
+  set(CMAKE_INSTALL_PREFIX "/home/ubuntu/bodeg-on/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,21 +38,21 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/faber/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/safe_execute_install.cmake")
+  include("/home/ubuntu/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/safe_execute_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/faber/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/installspace/ros_tcp_endpoint.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ubuntu/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/installspace/ros_tcp_endpoint.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_tcp_endpoint/cmake" TYPE FILE FILES
-    "/home/faber/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/installspace/ros_tcp_endpointConfig.cmake"
-    "/home/faber/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/installspace/ros_tcp_endpointConfig-version.cmake"
+    "/home/ubuntu/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/installspace/ros_tcp_endpointConfig.cmake"
+    "/home/ubuntu/bodeg-on/build/ROS-TCP-Endpoint/catkin_generated/installspace/ros_tcp_endpointConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_tcp_endpoint" TYPE FILE FILES "/home/faber/bodeg-on/src/ROS-TCP-Endpoint/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_tcp_endpoint" TYPE FILE FILES "/home/ubuntu/bodeg-on/src/ROS-TCP-Endpoint/package.xml")
 endif()
 

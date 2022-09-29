@@ -1,8 +1,8 @@
-# Install script for directory: /home/faber/bodeg-on/src/orderpicker
+# Install script for directory: /home/ubuntu/bodeg-on/src/orderpicker
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/faber/bodeg-on/install")
+  set(CMAKE_INSTALL_PREFIX "/home/ubuntu/bodeg-on/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/faber/bodeg-on/build/orderpicker/catkin_generated/installspace/orderpicker.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ubuntu/bodeg-on/build/orderpicker/catkin_generated/installspace/orderpicker.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orderpicker/cmake" TYPE FILE FILES
-    "/home/faber/bodeg-on/build/orderpicker/catkin_generated/installspace/orderpickerConfig.cmake"
-    "/home/faber/bodeg-on/build/orderpicker/catkin_generated/installspace/orderpickerConfig-version.cmake"
+    "/home/ubuntu/bodeg-on/build/orderpicker/catkin_generated/installspace/orderpickerConfig.cmake"
+    "/home/ubuntu/bodeg-on/build/orderpicker/catkin_generated/installspace/orderpickerConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orderpicker" TYPE FILE FILES "/home/faber/bodeg-on/src/orderpicker/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/orderpicker" TYPE FILE FILES "/home/ubuntu/bodeg-on/src/orderpicker/package.xml")
 endif()
 

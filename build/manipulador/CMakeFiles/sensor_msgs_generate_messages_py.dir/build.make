@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/faber/bodeg-on/src
+CMAKE_SOURCE_DIR = /home/ubuntu/bodeg-on/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/faber/bodeg-on/build
+CMAKE_BINARY_DIR = /home/ubuntu/bodeg-on/build
 
 # Utility rule file for sensor_msgs_generate_messages_py.
 
@@ -63,10 +63,10 @@ manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/build: sensor_msgs_g
 .PHONY : manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
 
 manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/clean:
-	cd /home/faber/bodeg-on/build/manipulador && $(CMAKE_COMMAND) -P CMakeFiles/sensor_msgs_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/ubuntu/bodeg-on/build/manipulador && $(CMAKE_COMMAND) -P CMakeFiles/sensor_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/clean
 
 manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/depend:
-	cd /home/faber/bodeg-on/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/faber/bodeg-on/src /home/faber/bodeg-on/src/manipulador /home/faber/bodeg-on/build /home/faber/bodeg-on/build/manipulador /home/faber/bodeg-on/build/manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ubuntu/bodeg-on/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ubuntu/bodeg-on/src /home/ubuntu/bodeg-on/src/manipulador /home/ubuntu/bodeg-on/build /home/ubuntu/bodeg-on/build/manipulador /home/ubuntu/bodeg-on/build/manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : manipulador/CMakeFiles/sensor_msgs_generate_messages_py.dir/depend
 
