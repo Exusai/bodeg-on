@@ -14,6 +14,7 @@ Web Video Server:
 - Instalar los paquetes:
   - `sudo apt install ros-noetic-image-transport`
   - `sudo apt install ros-noetic-web-video-server`
+  - `sudo apt install ros-noetic-image-transport-plugins`
 - `rosrun image_transport republish compressed in:=/gripper_cam out:=/image_raw`
 - `rosrun web_video_server web_video_server`
 - http://localhost:8080/stream_viewer?topic=/image_raw o http://localhost:8080/stream?topic=/image_raw
