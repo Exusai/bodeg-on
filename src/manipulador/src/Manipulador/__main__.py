@@ -5,11 +5,13 @@ import math
 import time
 import rospy
 from unity_msgs.msg import ArmTarget
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import CompressedImage, Image
 from matplotlib import pyplot as plt
 import cv2 as cv
 import numpy as np
-import tensorflow as tf
+
+#import tensorflow as tf
+from tflite_runtime.interpreter import Interpreter 
 
 from flask import Flask, send_file, request
 
@@ -29,7 +31,10 @@ con la vista superior en unity.
 class Manipulador():
     def __init__(self):
         self.ready = False
-        self.model = tf.keras.models.load_model('Manipulador/src/Models/PalletPoseEstimationWShelving_V2.h5', compile = False)
+        #self.model = tf.keras.models.load_model('Manipulador/src/Models/PalletPoseEstimationWShelving_V2.h5', compile = False)
+        self.model = Interpreter("Manipulador/src/Models/PalletPoseEstimationv3.tflite")
+        self.model.allocate_tensors()
+
         self.motion = MotionCore()
         #self.motion.goToIdle()
 
@@ -76,26 +81,33 @@ class Manipulador():
         # variable para contar cuantas cajas se han tomado
         self.boxesTaken = 0
 
-        rospy.Subscriber("/gripper_cam/compressed", CompressedImage, self.callback_Vis)
+        #rospy.Subscriber("/gripper_cam/compressed", CompressedImage, self.callback_Vis)
+        rospy.Subscriber("/gripper_cam", Image, self.callback_Vis)
+        self.isProcessing = False
 
         self.ready = True
+        print("Listo")
 
     def callback_Vis(self, data_vis):
-        im = np.frombuffer(data_vis.data, np.uint8)
-        im = cv.imdecode(im, cv.IMREAD_UNCHANGED)
+        if self.isProcessing: return
+        im = np.frombuffer(data_vis.data, np.uint8).reshape(data_vis.height, data_vis.width, -1)
+        #im = cv.imdecode(im, cv.IMREAD_UNCHANGED)
+        #print(np.shape(im))
 
         # adjust gamma value of the image
-        invGamma = 1.0 / 2.2
-        table = np.array([((i / 255.0) ** invGamma) * 255
-                          for i in np.arange(0, 256)]).astype("uint8")
+        #invGamma = 1.0 / 2.2
+        #table = np.array([((i / 255.0) ** invGamma) * 255 for i in np.arange(0, 256)]).astype("uint8")
         
-        im = cv.LUT(im, table)
+        #im = cv.LUT(im, table)
         
         # convert from bgr to rgb
         im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
-        im = tf.cast(im, tf.float32)
+        #im = tf.cast(im, tf.float32)
         im = (im/255)
-        im = tf.expand_dims(im, axis=0)
+        im = im.astype(np.float32)
+        im = np.expand_dims(im, axis=0)
+        #print(shape(im))
+        #im = tf.expand_dims(im, axis=0)
         
         self.RecivedImage = im
         
@@ -103,13 +115,25 @@ class Manipulador():
         """
         Function that runs inference on the model and returns the position of the pallet
         """
+        print("Getting Position")
+        self.isProcessing = True
         #cv.imshow("img", self.DispImg)
         #cv.waitKey(1000) # 1s para ver img
         #cv.destroyAllWindows()
 
-        # run inference
-        prediction = self.model.predict(self.RecivedImage)
+        print("Getting model input/output")
+        input_details = self.model.get_input_details()
+        output_details = self.model.get_output_details()
 
+        # run inference
+        #prediction = self.model.predict(self.RecivedImage)
+        print("setting input image")
+        self.model.set_tensor(input_details[0]['index'], self.RecivedImage)
+        print("Trying to invoke model")
+        self.model.invoke()
+        print("Predicting")
+        prediction = self.model.get_tensor(output_details[0]['index'])
+        print("Predicted")
         #position = prediction[0][0:3]
         position = prediction[0]
 
@@ -122,7 +146,7 @@ class Manipulador():
         self.posTarimaX = -position[0] #0
         
         self.palletOffset = [self.offsetX + self.posTarimaX, self.offsetY + self.posTarimaY]
-        
+        self.isProcessing = False
         print("Estimated Postion (x,y,z):", position)
 
         return position
