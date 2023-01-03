@@ -9,7 +9,7 @@
 # the message shall be republished as individual floats for each joint
 
 import rospy
-from unity_msgs.msg import ArmTarget
+from unity_msgs.msg import ArmPose
 from std_msgs.msg import Float32
 
 def callback(data):
@@ -22,7 +22,7 @@ def callback(data):
 
 def republisher():
     rospy.init_node('republisher', anonymous=True)
-    rospy.Subscriber("arm_pose", ArmPose, callback)
+    rospy.Subscriber("arm_pose_target", ArmPose, callback)
     rospy.spin()
 
 if __name__ == '__main__':
