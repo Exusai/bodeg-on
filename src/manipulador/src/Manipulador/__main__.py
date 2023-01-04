@@ -351,7 +351,7 @@ def index():
 
 @app.route('/performCircle', methods=['POST'])
 def performCircle():
-    manipulador.motion.performCircle()
+    manipulador.perform_circle_demo()
     return "Círculo realizado"
 
 @app.route('/goToOffloadPoint', methods=['POST'])
