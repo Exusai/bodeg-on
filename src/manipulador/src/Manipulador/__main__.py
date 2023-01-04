@@ -181,6 +181,9 @@ class Manipulador():
             # wait for a while
             time.sleep(.2) """
 
+    def perform_circle_demo(self):
+        self.motion.circleDemo(self.offloadPoint)
+
     def get_place_for_box(self, horizontal: bool):
         """
         this funtion returns a place for the box based on how many boxes have been taken
@@ -345,6 +348,11 @@ manipulador = Manipulador()
 @app.route('/')
 def index():
     return "Robot endpoint"
+
+@app.route('/performCircle', methods=['POST'])
+def performCircle():
+    manipulador.motion.performCircle()
+    return "Círculo realizado"
 
 @app.route('/goToOffloadPoint', methods=['POST'])
 def goToOffloadPoint():

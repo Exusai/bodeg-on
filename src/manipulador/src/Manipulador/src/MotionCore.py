@@ -1,5 +1,6 @@
 import time
 import rospy
+import numpy as np
 from unity_msgs.msg import ArmPose
 
 from . Arm import Arm
@@ -105,6 +106,37 @@ class MotionCore:
         #targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], lastLinkAngle, 0, 0, 0)
         targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(lastLinkAngle), 0, 0, suck)
         self.posePub.publish(targetPose)
+
+    def circleDemo(self, workSpaceInit):
+        """
+        It is used to test the arm
+        It makes the arm move in a circle of 20 cm radius around the workspaceInit using the inverse kinematics
+        """
+        # define the path of the circle around the workspaceInit with the desired radius and 100 points
+        # the circle is defined by the equation x^2 + y^2 = r^2
+        # the center of the circle is the workspaceInit
+        r = 0.2
+        circle = []
+        for i in range(100):
+            circle.append([workSpaceInit[0] + r * np.cos(2 * np.pi * i / 100), workSpaceInit[1] + r * np.sin(2 * np.pi * i / 100), 0])
+        
+        # go to the first point of the circle
+        P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(circle[0])
+        targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
+        self.posePub.publish(targetPose)
+
+        # delay 5 seconds
+        time.sleep(5)
+
+        # go to the rest of the points of the circle
+        for point in circle:
+            P, self.virtualArm.ikSolver.angle, err, solved, iteration = self.virtualArm.solveForTarget(point)
+            targetPose = ArmPose(self.virtualArm.ikSolver.angle[0], self.virtualArm.ikSolver.angle[1], self.lastLinkAngle(270), 0, 0, 0)
+            self.posePub.publish(targetPose)
+            time.sleep(0.1)
+        
+        print("Circle demo finished")
+
         
     def takeBox(self, workSpaceInit, target, targetZ, steps=10, debug=False, sleepTime=.2):
         """
