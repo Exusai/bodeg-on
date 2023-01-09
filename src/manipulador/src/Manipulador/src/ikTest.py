@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import math
 
 # Robot Link Length Parameter
-link = [1.1, 0.9]
+link = [.45, .30]
 # Robot Initial Joint Values (degree)
-angle = [26.60 + 90, 119]
+angle = [45 + 90, -90]
 # Target End of Effector Position
 target = [0, 0, 0] 
 
@@ -117,10 +117,10 @@ def onclick(event):
 
     # if target is in the second quadrant
     if target[0] < -width/2:
-        target[0] += 1
+        target[0] += .33
         #target[1] -= 1
     else:
-        target[0] -= 1
+        target[0] -= .33
         #target[1] += 1
     
     print("Target Position : ", target)
